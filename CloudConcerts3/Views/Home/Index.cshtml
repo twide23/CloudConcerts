@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="jumbotron">
+    <h1>Cloud Concerts</h1>
+    <p class="lead">Cloud Concerts helps venues find artists and helps listeners find concerts.</p>
+    <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>
+    <p>@User.Identity.GetUserId()</p>
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Looking for artists?</h2>
+        <p>You can find performers and bands for your next gig!</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Artists")">Find Artists &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Looking for concerts?</h2>
+        <p>You can find concerts that are happening in your area!</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Concerts")">Find Concerts &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Looking for gigs?</h2>
+        <p>You can find venues that need a performer or band for their next event!</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Hosts")">Find Venues &raquo;</a></p>
+    </div>
+</div>
