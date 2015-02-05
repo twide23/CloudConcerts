@@ -1,4 +1,5 @@
 ﻿using CloudConcerts3.DAL;
+using CloudConcerts3.Models;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,7 @@ namespace CloudConcerts3.Controllers
     public class HomeController : Controller
     {
         private MusicContext3 db = new MusicContext3();
+        private ApplicationDbContext appdb = new ApplicationDbContext();
 
         public ActionResult Index()
         {
@@ -19,26 +21,23 @@ namespace CloudConcerts3.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
-            //var email = User.Identity.GetUserName();
+            ////var email = User.Identity.GetUserName();
             var id = User.Identity.GetUserId();
-            var hosts = from s in db.Hosts
-                           select s;
+            //var hosts = from s in db.Hosts
+            //               select s;
+            var users = from l in appdb.Users
+                        where l.Id.Equals(id)
+                        select l;
+            var artists = from l in db.Artists
+                            where l.Id.Equals(id)
+                            select l;
+            var hosts = from l in db.Hosts
+                            where l.Id.Equals(id)
+                            select l;
             var listeners = from l in db.Listeners
+                            where l.Id.Equals(id)
                             select l;
 
-            //CloudConcerts3.DAL.MusicContext3 db = new CloudConcerts3.DAL.MusicContext3();
-
-            //if (email == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //var listener = db.Listeners.SingleOrDefault(lstnr => lstnr.Email == email);
-            //var list = db.Listeners.SingleOrDefault(lstnr => lstnr.Id == id);
-
-            //if (listener == null)
-            //{
-            //    return HttpNotFound();
-            //}
             return View(listeners.ToList());
         }
 

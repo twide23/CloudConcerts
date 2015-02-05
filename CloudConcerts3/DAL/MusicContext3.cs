@@ -27,11 +27,14 @@ namespace CloudConcerts3.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
-            //modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
-            //modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+            //modelBuilder.Entity<IdentityUserLogin>().ToTable("IdentityUserLogin");
+            //modelBuilder.Entity<IdentityRole>().ToTable("IdentityRole");
+            //modelBuilder.Entity<IdentityUserRole>().ToTable("IdentityUserRole");
+            //modelBuilder.Entity<ApplicationUser>().ToTable("Users");
+            modelBuilder.Entity<Host>().ToTable("Hosts");
+            modelBuilder.Entity<Artist>().ToTable("Artists");
+            modelBuilder.Entity<Listener>().ToTable("Listeners");
 
-            //modelBuilder.Entity<Host>().ToTable("Hosts");
         }
     }
 }

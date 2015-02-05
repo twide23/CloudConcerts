@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CloudConcerts3.Models
 {
+    [Table("Listeners")]
     public class Listener : ApplicationUser
     {
         [Display(Name = "First Name")]

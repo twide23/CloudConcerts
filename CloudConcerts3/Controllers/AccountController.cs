@@ -161,21 +161,21 @@ namespace CloudConcerts3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { };
-                var userType = model.Type;
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //var userType = model.Type;
 
-                if (userType == "Artist")
-                {
-                    user = new Artist { UserName = model.Email, Email = model.Email, GenreID = 1 };
-                }
-                else if (userType == "Host")
-                {
-                    user = new Host { UserName = model.Email, Email = model.Email };
-                }
-                else if (userType == "Listener")
-                {
-                    user = new Listener { UserName = model.Email, Email = model.Email };
-                }
+                //if (userType == "Artist")
+                //{
+                //    user = new Artist { UserName = model.Email, Email = model.Email, GenreID = 1 };
+                //}
+                //else if (userType == "Host")
+                //{
+                //    user = new Host { UserName = model.Email, Email = model.Email };
+                //}
+                //else if (userType == "Listener")
+                //{
+                //    user = new Listener { UserName = model.Email, Email = model.Email };
+                //}
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
