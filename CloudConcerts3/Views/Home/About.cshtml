@@ -1,4 +1,5 @@
-﻿@model CloudConcerts3.Models.Listener
+﻿@model IEnumerable<CloudConcerts3.Models.Listener>
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "About";
@@ -6,6 +7,9 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>@Html.DisplayFor(model => model.FirstName)</p>
-
 <p>Use this area to provide additional information.</p>
+<hr />
+@foreach (var item in Model) {
+    <p>@Html.DisplayFor(modelItem => item.Id)</p>
+    <p>@User.Identity.GetUserId()</p>
+}

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
 using CloudConcerts3.Models;
 
 namespace CloudConcerts3.DAL
@@ -20,14 +17,14 @@ namespace CloudConcerts3.DAL
             genres.ForEach(s => context.Genres.Add(s));
             context.SaveChanges();
 
-            var artists = new List<Artist>
-            {
-            new Artist{StageName="Cat's Meow",Description="Straight outta the alley",GenreID=1,Email="cat@aol.com"},
-            new Artist{StageName="Dog's Woof",Description="Straight outta the mud",GenreID=2,Email="dog@aol.com"},
-            new Artist{StageName="Duck's Quack",Description="Straight outta the pond",GenreID=3,Email="duck@aol.com"}
-            };
-            artists.ForEach(s => context.Artists.Add(s));
-            context.SaveChanges();
+            //var artists = new List<Artist>
+            //{
+            //new Artist{StageName="Cat's Meow",Description="Straight outta the alley",GenreID=1,Email="cat@aol.com"},
+            //new Artist{StageName="Dog's Woof",Description="Straight outta the mud",GenreID=2,Email="dog@aol.com"},
+            //new Artist{StageName="Duck's Quack",Description="Straight outta the pond",GenreID=3,Email="duck@aol.com"}
+            //};
+            //artists.ForEach(s => context.Artists.Add(s));
+            //context.SaveChanges();
 
             var members = new List<Member>
             {
@@ -41,14 +38,14 @@ namespace CloudConcerts3.DAL
             members.ForEach(s => context.Members.Add(s));
             context.SaveChanges();
 
-            var hosts = new List<Host>
-            {
-            new Host{VenueName="Stadium", Description="LIVE MUSIC", Address="DC", Phone="456-789-1230", Website="www.stadium.com", Email="stadium@aol.com"},
-            new Host{VenueName="Jazz Hall", Description="Smooth listening", Address="Baton Rouge", Phone="789-123-4560", Website="www.jazz.com", Email="jazz@aol.com"},
-            new Host{VenueName="Backyard", Description="For a wedding", Address="Chicago", Phone="123-456-7890", Website="www.backyard.com", Email="backyard@aol.com"}
-            };
-            hosts.ForEach(s => context.Hosts.Add(s));
-            context.SaveChanges();
+            //var hosts = new List<Host>
+            //{
+            //new Host{VenueName="Stadium", Description="LIVE MUSIC", Address="DC", Phone="456-789-1230", Website="www.stadium.com", Email="stadium@aol.com"},
+            //new Host{VenueName="Jazz Hall", Description="Smooth listening", Address="Baton Rouge", Phone="789-123-4560", Website="www.jazz.com", Email="jazz@aol.com"},
+            //new Host{VenueName="Backyard", Description="For a wedding", Address="Chicago", Phone="123-456-7890", Website="www.backyard.com", Email="backyard@aol.com"}
+            //};
+            //hosts.ForEach(s => context.Hosts.Add(s));
+            //context.SaveChanges();
 
             var concerts = new List<Concert>
             {
@@ -59,14 +56,14 @@ namespace CloudConcerts3.DAL
             concerts.ForEach(s => context.Concerts.Add(s));
             context.SaveChanges();
 
-            var listeners = new List<Listener>
-            {
-            new Listener{FirstName="Jim", LastName="Mars", City="Richmond", State="VA", Email="jim@aol.com"},
-            new Listener{FirstName="Tim", LastName="Jupiter", City="New York", State="NY", Email="tim@aol.com"},
-            new Listener{FirstName="Mike", LastName="Saturn", City="Chicago", State="IL", Email="mike@aol.com"}
-            };
-            listeners.ForEach(s => context.Listeners.Add(s));
-            context.SaveChanges();
+            //var listeners = new List<Listener>
+            //{
+            //new Listener{FirstName="Jim", LastName="Mars", City="Richmond", State="VA", Email="jim@aol.com"},
+            //new Listener{FirstName="Tim", LastName="Jupiter", City="New York", State="NY", Email="tim@aol.com"},
+            //new Listener{FirstName="Mike", LastName="Saturn", City="Chicago", State="IL", Email="mike@aol.com"}
+            //};
+            //listeners.ForEach(s => context.Listeners.Add(s));
+            //context.SaveChanges();
         }
     }
 }

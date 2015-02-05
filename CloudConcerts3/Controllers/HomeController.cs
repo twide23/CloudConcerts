@@ -1,17 +1,15 @@
 ﻿using CloudConcerts3.DAL;
-using System;
-using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using CloudConcerts3.Models;
 
 namespace CloudConcerts3.Controllers
 {
     public class HomeController : Controller
     {
+        private MusicContext3 db = new MusicContext3();
+
         public ActionResult Index()
         {
             return View();
@@ -21,19 +19,27 @@ namespace CloudConcerts3.Controllers
         {
             ViewBag.Message = "Your application description page.";
 
-            MusicContext3 db = new MusicContext3();
-
+            //var email = User.Identity.GetUserName();
             var id = User.Identity.GetUserId();
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Listener listener = db.Listeners.Find(id);
-            if (listener == null)
-            {
-                return HttpNotFound();
-            }
-            return View(listener);
+            var hosts = from s in db.Hosts
+                           select s;
+            var listeners = from l in db.Listeners
+                            select l;
+
+            //CloudConcerts3.DAL.MusicContext3 db = new CloudConcerts3.DAL.MusicContext3();
+
+            //if (email == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //var listener = db.Listeners.SingleOrDefault(lstnr => lstnr.Email == email);
+            //var list = db.Listeners.SingleOrDefault(lstnr => lstnr.Id == id);
+
+            //if (listener == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View(listeners.ToList());
         }
 
         public ActionResult Contact()

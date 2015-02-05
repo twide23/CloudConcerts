@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CloudConcerts3.Models;
+using System.Collections.Generic;
 
 namespace CloudConcerts3.Controllers
 {
@@ -139,6 +140,15 @@ namespace CloudConcerts3.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            List<SelectListItem> myList = new List<SelectListItem>();
+            myList.Add(new SelectListItem { Value = "Artist", Text = "Artist" });
+            myList.Add(new SelectListItem { Value = "Host", Text = "Host" });
+            myList.Add(new SelectListItem { Value = "Listener", Text = "Listener" });
+
+            var choices = new SelectList(myList, "Value", "Text");
+
+            ViewBag.Choices = choices;
+
             return View();
         }
 
@@ -151,14 +161,25 @@ namespace CloudConcerts3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { };
+                var userType = model.Type;
+
+                if (userType == "Artist")
+                {
+                    user = new Artist { UserName = model.Email, Email = model.Email, GenreID = 1 };
+                }
+                else if (userType == "Host")
+                {
+                    user = new Host { UserName = model.Email, Email = model.Email };
+                }
+                else if (userType == "Listener")
+                {
+                    user = new Listener { UserName = model.Email, Email = model.Email };
+                }
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    CloudConcerts3.DAL.MusicContext3 db = new CloudConcerts3.DAL.MusicContext3();
-                    var listener = new Listener { UserName = model.Email, Email = model.Email, Id = user.Id };
-                    db.Listeners.Add(listener);
-                    db.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

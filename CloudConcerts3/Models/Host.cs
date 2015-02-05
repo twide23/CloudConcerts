@@ -7,11 +7,8 @@ using System.Web;
 
 namespace CloudConcerts3.Models
 {
-    public class Host : IdentityUser
+    public class Host : ApplicationUser
     {
-        [Key]
-        public int HostID { get; set; }
-
         [Display(Name = "Venue")]
         public String VenueName { get; set; }
 
@@ -23,7 +20,7 @@ namespace CloudConcerts3.Models
 
         public String Website { get; set; }
 
-        public virtual ICollection<Concert> Concerts { get; set; }
+        //public virtual ICollection<Concert> Concerts { get; set; }
 
         //public String Email { get; set; }
     }

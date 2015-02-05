@@ -8,7 +8,7 @@ using System.Web;
 
 namespace CloudConcerts3.DAL
 {
-    public class MusicContext3 : DbContext
+    public class MusicContext3 : IdentityDbContext<ApplicationUser>
     {
 
         public MusicContext3()
@@ -27,9 +27,11 @@ namespace CloudConcerts3.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
-            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
-            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+            //modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
+            //modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
+            //modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });
+
+            //modelBuilder.Entity<Host>().ToTable("Hosts");
         }
     }
 }

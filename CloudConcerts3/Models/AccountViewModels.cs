@@ -65,6 +65,10 @@ namespace CloudConcerts3.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Type of Account")]
+        public string Type { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

@@ -69,7 +69,7 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "HostID,VenueName,Description,Address,Phone,Website,Email")] Host host)
+        public ActionResult Create([Bind(Include = "VenueName,Description,Address,Phone,Website,Email")] Host host)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +101,7 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "HostID,VenueName,Description,Address,Phone,Website,Email")] Host host)
+        public ActionResult Edit([Bind(Include = "VenueName,Description,Address,Phone,Website,Email")] Host host)
         {
             if (ModelState.IsValid)
             {

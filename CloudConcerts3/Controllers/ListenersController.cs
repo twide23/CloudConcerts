@@ -74,7 +74,7 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ListenerID,FirstName,LastName,City,State,Email")] Listener listener)
+        public ActionResult Create([Bind(Include = "FirstName,LastName,City,State,Email")] Listener listener)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ListenerID,FirstName,LastName,City,State,Email")] Listener listener)
+        public ActionResult Edit([Bind(Include = "FirstName,LastName,City,State,Email")] Listener listener)
         {
             if (ModelState.IsValid)
             {

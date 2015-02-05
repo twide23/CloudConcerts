@@ -7,11 +7,8 @@ using System.Web;
 
 namespace CloudConcerts3.Models
 {
-    public class Artist : IdentityUser
+    public class Artist : ApplicationUser
     {
-        [Key]
-        public int ArtistID { get; set; }
-
         [Display(Name = "Stage Name")]
         public String StageName { get; set; }
 
@@ -21,9 +18,9 @@ namespace CloudConcerts3.Models
 
         public virtual Genre Genre { get; set; }
 
-        public virtual ICollection<Member> Members { get; set; }
+        //public virtual ICollection<Member> Members { get; set; }
 
-        public virtual ICollection<Concert> Concerts { get; set; }
+        //public virtual ICollection<Concert> Concerts { get; set; }
 
         //public String Email { get; set; }
     }
