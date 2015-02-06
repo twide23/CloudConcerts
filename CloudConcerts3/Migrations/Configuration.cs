@@ -1,9 +1,10 @@
 namespace CloudConcerts3.Migrations
 {
-    using System;
-    using System.Data.Entity;
+    using CloudConcerts3.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System.Data.Entity.Migrations;
-    using System.Linq;
+    using System.Web;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CloudConcerts3.DAL.MusicContext3>
     {
@@ -15,6 +16,7 @@ namespace CloudConcerts3.Migrations
 
         protected override void Seed(CloudConcerts3.DAL.MusicContext3 context)
         {
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

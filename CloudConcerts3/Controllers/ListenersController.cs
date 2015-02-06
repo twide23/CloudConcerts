@@ -8,6 +8,7 @@ using System;
 
 namespace CloudConcerts3.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ListenersController : Controller
     {
         private MusicContext3 db = new MusicContext3();
@@ -62,29 +63,6 @@ namespace CloudConcerts3.Controllers
             }
             return View(listener);
         }
-
-        //// GET: Listeners/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Listeners/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "FirstName,LastName,City,State,Email")] Listener listener)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Listeners.Add(listener);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(listener);
-        //}
 
         // GET: Listeners/Edit/5
         public ActionResult Edit(string id)

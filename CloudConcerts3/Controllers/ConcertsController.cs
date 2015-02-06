@@ -11,6 +11,7 @@ using CloudConcerts3.Models;
 
 namespace CloudConcerts3.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ConcertsController : Controller
     {
         private MusicContext3 db = new MusicContext3();

@@ -24,17 +24,20 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Databases <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
-                            <li>@Html.ActionLink("Genres", "Index", "Genres")</li>
-                            <li>@Html.ActionLink("Members", "Index", "Members")</li>
-                            <li>@Html.ActionLink("Hosts", "Index", "Hosts")</li>
-                            <li>@Html.ActionLink("Concerts", "Index", "Concerts")</li>
-                            <li>@Html.ActionLink("Listeners", "Index", "Listeners")</li>
-                        </ul>
-                    </li>
+                    @if (ViewContext.HttpContext.User.IsInRole("admin"))
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Databases <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Artists", "Index", "Artists")</li>
+                                <li>@Html.ActionLink("Genres", "Index", "Genres")</li>
+                                <li>@Html.ActionLink("Members", "Index", "Members")</li>
+                                <li>@Html.ActionLink("Hosts", "Index", "Hosts")</li>
+                                <li>@Html.ActionLink("Concerts", "Index", "Concerts")</li>
+                                <li>@Html.ActionLink("Listeners", "Index", "Listeners")</li>
+                            </ul>
+                        </li>
+                    }
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>

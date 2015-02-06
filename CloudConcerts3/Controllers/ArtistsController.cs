@@ -11,6 +11,7 @@ using CloudConcerts3.Models;
 
 namespace CloudConcerts3.Controllers
 {
+    [Authorize(Roles="admin")]
     public class ArtistsController : Controller
     {
         private MusicContext3 db = new MusicContext3();
@@ -64,33 +65,6 @@ namespace CloudConcerts3.Controllers
             }
             return View(artist);
         }
-
-        //// GET: Artists/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "Name");
-        //    return View();
-        //}
-
-        //// POST: Artists/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "StageName,Description,GenreID,Email")] Artist artist)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        //db.Artists.Add(artist);
-        //        //db.SaveChanges();
-        //        var user = new Artist { UserName = artist.Email, Email = artist.Email, StageName = artist.StageName, Description = artist.Description, GenreID = artist.GenreID };
-
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "Name", artist.GenreID);
-        //    return View(artist);
-        //}
 
         // GET: Artists/Edit/5
         public ActionResult Edit(string id)

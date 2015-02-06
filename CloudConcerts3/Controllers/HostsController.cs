@@ -11,6 +11,7 @@ using CloudConcerts3.Models;
 
 namespace CloudConcerts3.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class HostsController : Controller
     {
         private MusicContext3 db = new MusicContext3();
@@ -57,29 +58,6 @@ namespace CloudConcerts3.Controllers
             }
             return View(host);
         }
-
-        //// GET: Hosts/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Hosts/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "VenueName,Description,Address,Phone,Website,Email")] Host host)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Hosts.Add(host);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(host);
-        //}
 
         // GET: Hosts/Edit/5
         public ActionResult Edit(string id)
