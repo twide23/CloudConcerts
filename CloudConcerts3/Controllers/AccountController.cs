@@ -162,20 +162,20 @@ namespace CloudConcerts3.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                //var userType = model.Type;
+                var userType = model.Type;
 
-                //if (userType == "Artist")
-                //{
-                //    user = new Artist { UserName = model.Email, Email = model.Email, GenreID = 1 };
-                //}
-                //else if (userType == "Host")
-                //{
-                //    user = new Host { UserName = model.Email, Email = model.Email };
-                //}
-                //else if (userType == "Listener")
-                //{
-                //    user = new Listener { UserName = model.Email, Email = model.Email };
-                //}
+                if (userType == "Artist")
+                {
+                    user = new Artist { UserName = model.Email, Email = model.Email, GenreID = 1 };
+                }
+                else if (userType == "Host")
+                {
+                    user = new Host { UserName = model.Email, Email = model.Email };
+                }
+                else if (userType == "Listener")
+                {
+                    user = new Listener { UserName = model.Email, Email = model.Email };
+                }
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -194,6 +194,15 @@ namespace CloudConcerts3.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            //Need to call everything we called in GET:/Account/Register
+            List<SelectListItem> myList = new List<SelectListItem>();
+            myList.Add(new SelectListItem { Value = "Artist", Text = "Artist" });
+            myList.Add(new SelectListItem { Value = "Host", Text = "Host" });
+            myList.Add(new SelectListItem { Value = "Listener", Text = "Listener" });
+
+            var choices = new SelectList(myList, "Value", "Text");
+
+            ViewBag.Choices = choices;
             return View(model);
         }
 
