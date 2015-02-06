@@ -36,7 +36,10 @@ ipch/
 *.bak
 *.mdf
 *.ldf
-packages*
+
+#NuGet
+packages/
+*.nupkg
 
 #Tools
 _ReSharper.*
