@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@model CloudConcerts3.Models.ApplicationUser
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Home";
@@ -7,8 +8,33 @@
 <div class="jumbotron">
     <h1>Cloud Concerts</h1>
     <p class="lead">Cloud Concerts helps venues find artists and helps listeners find concerts.</p>
-    <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>
-    <p>@User.Identity.GetUserId()</p>
+
+    @if (User.IsInRole("admin"))
+    {
+        <p>Logged in as an ADMIN</p>
+    }
+    else if (Model is CloudConcerts3.Models.Host)
+    {
+        <p>Logged in as a HOST</p>
+        @*Add a link for "artists" here
+            <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>*@
+    }
+    else if (Model is CloudConcerts3.Models.Artist)
+    {
+        <p>Logged in as an ARTIST</p>
+        @*Add a link for "hosts/gigs" here
+            <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>*@
+    }
+    else if (Model is CloudConcerts3.Models.Listener)
+    {
+        <p>Logged in as a LISTENER</p>
+        @*Add a link for "concerts" here
+            <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>*@
+    }
+    else
+    {
+        <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>
+    }
 
 </div>
 

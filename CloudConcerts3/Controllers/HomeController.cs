@@ -14,7 +14,12 @@ namespace CloudConcerts3.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var id = User.Identity.GetUserId();
+            var users = from l in appdb.Users
+                        where l.Id.Equals(id)
+                        select l;
+
+            return View(users.FirstOrDefault());
         }
 
         public ActionResult About()
