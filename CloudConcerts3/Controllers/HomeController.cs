@@ -23,19 +23,10 @@ namespace CloudConcerts3.Controllers
 
             var id = User.Identity.GetUserId();
             var users = from l in appdb.Users
-                        //where l.Id.Equals(id)
+                        where l.Id.Equals(id)
                         select l;
-            //var artists = from l in db.Artists
-            //                where l.Id.Equals(id)
-            //                select l;
-            //var hosts = from l in db.Hosts
-            //                where l.Id.Equals(id)
-            //                select l;
-            //var listeners = from l in db.Listeners
-            //                where l.Id.Equals(id)
-            //                select l;
 
-            return View(users.ToList());
+            return View(users.FirstOrDefault());
         }
 
         public ActionResult Contact()

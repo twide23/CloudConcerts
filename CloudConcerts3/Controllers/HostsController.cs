@@ -44,7 +44,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Hosts/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
@@ -58,31 +58,31 @@ namespace CloudConcerts3.Controllers
             return View(host);
         }
 
-        // GET: Hosts/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Hosts/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Hosts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "VenueName,Description,Address,Phone,Website,Email")] Host host)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Hosts.Add(host);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: Hosts/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "VenueName,Description,Address,Phone,Website,Email")] Host host)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Hosts.Add(host);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(host);
-        }
+        //    return View(host);
+        //}
 
         // GET: Hosts/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -101,11 +101,17 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "VenueName,Description,Address,Phone,Website,Email")] Host host)
+        public ActionResult Edit([Bind(Include = "Id,VenueName,Description,Address,Phone,Website")] Host host)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(host).State = EntityState.Modified;
+                Host original = db.Hosts.Find(host.Id);
+                original.VenueName = host.VenueName;
+                original.Description = host.Description;
+                original.Address = host.Address;
+                original.Phone = host.Phone;
+                original.Website = host.Website;
+                db.Entry(original).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -113,7 +119,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Hosts/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
@@ -130,10 +136,10 @@ namespace CloudConcerts3.Controllers
         // POST: Hosts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            Host host = db.Hosts.Find(id);
-            db.Hosts.Remove(host);
+            ApplicationUser user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

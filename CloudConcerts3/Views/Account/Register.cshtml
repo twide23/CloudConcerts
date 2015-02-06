@@ -12,14 +12,18 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     
+    /*  Select the type of user  */
     <div class="form-group">
         @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.DropDownList("Type", @ViewBag.Choices as SelectList, "")
         </div>
     </div>
+    
+    /*  Render different partial views based on which type is picked in dropdown  */
+    
 
-
+    /*  Every type of user will have an email and password field  */
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

@@ -249,7 +249,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Artists\Create.cshtml" />
     <Content Include="Views\Artists\Delete.cshtml" />
     <Content Include="Views\Artists\Details.cshtml" />
     <Content Include="Views\Artists\Edit.cshtml" />
@@ -264,7 +263,6 @@
     <Content Include="Views\Members\Details.cshtml" />
     <Content Include="Views\Members\Edit.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
-    <Content Include="Views\Hosts\Create.cshtml" />
     <Content Include="Views\Hosts\Delete.cshtml" />
     <Content Include="Views\Hosts\Details.cshtml" />
     <Content Include="Views\Hosts\Edit.cshtml" />
@@ -274,11 +272,13 @@
     <Content Include="Views\Concerts\Details.cshtml" />
     <Content Include="Views\Concerts\Edit.cshtml" />
     <Content Include="Views\Concerts\Index.cshtml" />
-    <Content Include="Views\Listeners\Create.cshtml" />
     <Content Include="Views\Listeners\Delete.cshtml" />
     <Content Include="Views\Listeners\Details.cshtml" />
     <Content Include="Views\Listeners\Edit.cshtml" />
     <Content Include="Views\Listeners\Index.cshtml" />
+    <Content Include="Views\ProfilePartials\_ArtistProfile.cshtml" />
+    <Content Include="Views\ProfilePartials\_HostProfile.cshtml" />
+    <Content Include="Views\ProfilePartials\_ListenerProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

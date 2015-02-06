@@ -51,7 +51,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Artists/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
@@ -65,33 +65,35 @@ namespace CloudConcerts3.Controllers
             return View(artist);
         }
 
-        // GET: Artists/Create
-        public ActionResult Create()
-        {
-            ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "Name");
-            return View();
-        }
+        //// GET: Artists/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "Name");
+        //    return View();
+        //}
 
-        // POST: Artists/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StageName,Description,GenreID,Email")] Artist artist)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Artists.Add(artist);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: Artists/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "StageName,Description,GenreID,Email")] Artist artist)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //db.Artists.Add(artist);
+        //        //db.SaveChanges();
+        //        var user = new Artist { UserName = artist.Email, Email = artist.Email, StageName = artist.StageName, Description = artist.Description, GenreID = artist.GenreID };
 
-            ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "Name", artist.GenreID);
-            return View(artist);
-        }
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "Name", artist.GenreID);
+        //    return View(artist);
+        //}
 
         // GET: Artists/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -111,12 +113,17 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StageName,Description,GenreID,Email")] Artist artist)
+        public ActionResult Edit([Bind(Include = "Id,StageName,Description,GenreID")] Artist artist)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(artist).State = EntityState.Modified;
+                Artist original = db.Artists.Find(artist.Id);
+                original.StageName = artist.StageName;
+                original.Description = artist.Description;
+                original.GenreID = artist.GenreID;
+                db.Entry(original).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "Name", artist.GenreID);
@@ -124,7 +131,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Artists/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
@@ -141,10 +148,10 @@ namespace CloudConcerts3.Controllers
         // POST: Artists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            Artist artist = db.Artists.Find(id);
-            db.Artists.Remove(artist);
+            ApplicationUser user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

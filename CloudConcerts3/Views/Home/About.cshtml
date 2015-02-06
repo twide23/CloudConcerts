@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CloudConcerts3.Models.ApplicationUser>
+﻿@model CloudConcerts3.Models.ApplicationUser
 @using Microsoft.AspNet.Identity;
 
 @{
@@ -9,21 +9,21 @@
 
 <p>Use this area to provide additional information.</p>
 <hr />
-@foreach (var item in Model) {
+@{
+
+    if (Model is CloudConcerts3.Models.Host)
     {
-    if (item is CloudConcerts3.Models.Host)
-    {
-        <p>Host:</p>
+        @Html.Partial("~/Views/ProfilePartials/_HostProfile.cshtml")
     }
-    else if (item is CloudConcerts3.Models.Artist)
+    else if (Model is CloudConcerts3.Models.Artist)
     {
-        <p>Artist:</p>
+        @Html.Partial("~/Views/ProfilePartials/_ArtistProfile.cshtml")
     }
-    else if (item is CloudConcerts3.Models.Listener)
+    else if (Model is CloudConcerts3.Models.Listener)
     {
-        <p>Listener:</p>
+        @Html.Partial("~/Views/ProfilePartials/_ListenerProfile.cshtml")
     }
+    
 }
-    <p>From model:   @Html.DisplayFor(modelItem => item.Id)</p>
-    <p>Current User: @User.Identity.GetUserId()</p>
-}
+<p>We love music!</p>
+

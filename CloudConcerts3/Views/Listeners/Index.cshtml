@@ -6,9 +6,9 @@
 
 <h2>Listeners</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 
 @using (Html.BeginForm())
 {
@@ -56,9 +56,9 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.ListenerID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ListenerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ListenerID })*@
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

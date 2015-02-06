@@ -4,7 +4,7 @@ using CloudConcerts3.Models;
 
 namespace CloudConcerts3.DAL
 {
-    public class MusicInitializer : System.Data.Entity.DropCreateDatabaseAlways<MusicContext3>
+    public class MusicInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<MusicContext3>
     {
         protected override void Seed(MusicContext3 context)
         {

@@ -49,7 +49,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Listeners/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
@@ -63,31 +63,31 @@ namespace CloudConcerts3.Controllers
             return View(listener);
         }
 
-        // GET: Listeners/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Listeners/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Listeners/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FirstName,LastName,City,State,Email")] Listener listener)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Listeners.Add(listener);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: Listeners/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "FirstName,LastName,City,State,Email")] Listener listener)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Listeners.Add(listener);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(listener);
-        }
+        //    return View(listener);
+        //}
 
         // GET: Listeners/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -106,11 +106,16 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FirstName,LastName,City,State,Email")] Listener listener)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,City,State")] Listener listener)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(listener).State = EntityState.Modified;
+                Listener original = db.Listeners.Find(listener.Id);
+                original.FirstName = listener.FirstName;
+                original.LastName = listener.LastName;
+                original.City = listener.City;
+                original.State = listener.State;
+                db.Entry(original).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -118,7 +123,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Listeners/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
@@ -135,10 +140,10 @@ namespace CloudConcerts3.Controllers
         // POST: Listeners/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            Listener listener = db.Listeners.Find(id);
-            db.Listeners.Remove(listener);
+            ApplicationUser user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
