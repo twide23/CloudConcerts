@@ -22,7 +22,7 @@ Root calendar element
 	line and use your image of choice. You may also want to enable borders on the day
 	cells.
 	*/
-	/*background-image:url('images/bw-tree.jpg');*/
+	/*background-image:url('Resources/bw-tree.jpg');*/
 }
 /*
 Style shared by all day cells.
@@ -35,8 +35,8 @@ Style shared by all day cells.
 .JFrontierCal .JFrontierCal-Day-Cell-Droppable,
 .JFrontierCal .JFrontierCal-Day-Cell-Today {
 	padding: 0px;
-	border-bottom: 0px solid #ffffff;
-	border-left: 0px solid #ffffff;
+	border-bottom: 4px solid #ffffff;
+	border-left: 4px solid #ffffff;
 	font: 13px verdana;
 	float: left;
 	clear: right;
@@ -54,7 +54,7 @@ Style for day cells on the current month.
 .JFrontierCal .JFrontierCal-Day-Cell-Last{
 	background-color: #efefef;
 	color: #444444;	
-	background-image:url('images/dayCellCurrentMonth.png');
+	/*background-image:url('images/dayCellCurrentMonth.png');*/
 	background-repeat:repeat-y;
 }
 /*
@@ -65,7 +65,7 @@ Style for previous month and next month day cells.
 .JFrontierCal .JFrontierCal-NextMonth-Day-Cell-Last {
 	background-color: #cccccc;
 	color: #999999;
-	background-image:url('images/dayCellOtherMonth.png');
+	/*background-image:url('images/dayCellOtherMonth.png');*/
 	background-repeat:repeat-y;
 }
 /*
@@ -89,7 +89,7 @@ Style for current date day cell
 	background-color: #d6e2ff;
 	color: #444444;
 	/*background-image: none;*/
-	background-image:url('images/dayCellToday.png');
+	/*background-image:url('images/dayCellToday.png');*/
 }
 /*
 Style for header cells (day name cells at top of calendar)
@@ -97,16 +97,16 @@ Style for header cells (day name cells at top of calendar)
 .JFrontierCal .JFrontierCal-Header-Cell,
 .JFrontierCal .JFrontierCal-Header-Cell-Last {
 	padding: 0px;	
-	border-top: 0px solid #ffffff;
+	border-top: 4px solid #ffffff;
 	border-bottom: 0px solid #ffffff;
-	border-left: 0px solid #ffffff;
+	border-left: 4px solid #ffffff;
 	background-color: #777777;
 	color: white;
-	font: 13px verdana;
+	font: 16px arial;
 	/*font-weight: bold;*/
 	float: left;
 	clear: right;
-	height: 17px;
+	height: 24px;
 }
 /*
 Style for Saturday header cell at top of calendar.
@@ -123,7 +123,7 @@ Style for week Header cells (cells for day numbers above each week)
 .JFrontierCal .JFrontierCal-NextMonth-Week-Header-Cell,
 .JFrontierCal .JFrontierCal-NextMonth-Week-Header-Cell-Last {
 	padding: 0px;
-	border-left: 0px solid #ffffff;
+	border-left: 4px solid #ffffff;
 	background-color: #dedede;
 	color: #000000;
 	font: 13px verdana;
@@ -161,7 +161,8 @@ Style for agenda items. These are simply default values. Some values can be conf
 	font: 14px verdana;
 	background-color: #7fad00;
 	color: #ffffff;
-	margin: 0px;
+	margin-left:4px;
+    margin-right:4px;
 	white-space: nowrap;
 	text-align: left;
 }
