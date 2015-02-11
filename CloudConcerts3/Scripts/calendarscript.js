@@ -2,6 +2,8 @@
     /**
 * Initialize with current year and date. Returns reference to plugin object.
 */
+    alert($("#mycal"));
+
     var jfcalplugin = $("#mycal").jFrontierCal({
         date: new Date(),
         agendaClickCallback: myAgendaClickHandler,
