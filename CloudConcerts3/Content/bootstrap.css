@@ -2279,6 +2279,7 @@ textarea.input-lg {
         border-color: #285e8e;
     }
 
+
     .btn-primary:active,
     .btn-primary.active,
     .open .dropdown-toggle.btn-primary {
@@ -2441,11 +2442,6 @@ textarea.input-lg {
         color: #ffffff;
         background-color: #39b3d7;
         border-color: #269abc;
-    }
-
-    .btn-info:focus {
-        background-color: #5bc0de;
-        border-color: #46b8da;
     }
 
     .btn-info:active,

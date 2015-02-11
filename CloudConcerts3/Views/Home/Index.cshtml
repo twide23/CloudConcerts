@@ -15,9 +15,12 @@
     }
     else if (Model is CloudConcerts3.Models.Host)
     {
-        <p>Logged in as a HOST</p>
-        @*Add a link for "artists" here
-            <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>*@
+        @*Add a link for "artists" here*@
+        <p>Do you have an upcoming event and need a performer?</p>
+        <p>
+            <a href="@Url.Action("Create", "Gigs")" class="btn btn-primary btn-lg">Create a gig &raquo;</a>
+            <a href="@Url.Action("Index", "Gigs")" class="btn btn-primary btn-lg">View my gigs &raquo;</a>
+        </p>
     }
     else if (Model is CloudConcerts3.Models.Artist)
     {
@@ -50,8 +53,8 @@
         <p><a class="btn btn-default" href="@Url.Action("Concerts", "Browse")">Find Concerts &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Looking for gigs?</h2>
-        <p>You can find venues that need a performer or band for their next event!</p>
+        <h2>Looking for venues?</h2>
+        <p>You can find venues that regularly have concerts!</p>
         <p><a class="btn btn-default" href="@Url.Action("Hosts", "Browse")">Find Venues &raquo;</a></p>
     </div>
 </div>

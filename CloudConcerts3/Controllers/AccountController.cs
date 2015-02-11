@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using CloudConcerts3.Models;
 using System.Collections.Generic;
 using CloudConcerts3.DAL;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CloudConcerts3.Controllers
 {
@@ -199,7 +200,21 @@ namespace CloudConcerts3.Controllers
                     };
                 }
 
+                //Create a new user
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                if (userType == "Host")
+                {
+                    var roleStore = new RoleStore<IdentityRole>(db);
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    if (!roleManager.RoleExists("host"))
+                    {
+                        roleManager.Create(new IdentityRole("host"));
+                    }
+
+                    UserManager.AddToRole(user.Id, "host");
+                }
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

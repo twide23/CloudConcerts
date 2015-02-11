@@ -6,10 +6,11 @@
 
 <h2>Concerts Calendar</h2>
 
-<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle;">
-    <button id="BtnPreviousMonth" class="btn btn-info">Previous Month</button>
-    <button id="BtnNextMonth" class="btn btn-info">Next Month</button>
+<div id="toolbar" class="ui-widget-header ui-corner-all" style="padding:3px; vertical-align: middle; min-width:400px;">
+    <button id="BtnPreviousMonth" class="btn btn-primary">Previous Month</button>
+    <button id="BtnNextMonth" class="btn btn-primary">Next Month</button>
     <span style="white-space:nowrap;">Date: <input type="text" id="dateSelect" size="20" /></span>
+    <a href="@Url.Action("Concerts", "Browse")" class="btn btn-primary">View Concert List &raquo;</a>
 </div>
 
 <div id="mycal"></div>

@@ -11,6 +11,7 @@
     <p>
         @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
+        <a href="@Url.Action("Calendar", "Browse")" class="btn btn-primary">View Concert Calendar &raquo;</a>
     </p>
 }
 

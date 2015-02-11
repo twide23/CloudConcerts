@@ -137,6 +137,7 @@
             var cday = calDate.getDate();
             // jquery datepicker month starts at 1 (1=January) so we add 1
             $("#dateSelect").datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
+            $("#BtnPreviousMonth").blur();
             return false;
         });
         /**
@@ -153,6 +154,7 @@
             var cday = calDate.getDate();
             // jquery datepicker month starts at 1 (1=January) so we add 1
             $("#dateSelect").datepicker("setDate", cyear + "-" + (cmonth + 1) + "-" + cday);
+            $("#BtnNextMonth").blur();
             return false;
         });
     }

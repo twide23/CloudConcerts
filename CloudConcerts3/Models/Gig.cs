@@ -6,9 +6,9 @@ using System.Web;
 
 namespace CloudConcerts3.Models
 {
-    public class Concert
+    public class Gig
     {
-        public int ConcertID { get; set; }
+        public int GigID { get; set; }
 
         //[Required]
         public String Name { get; set; }
@@ -30,9 +30,8 @@ namespace CloudConcerts3.Models
         public String Description { get; set; }
 
         //[Required]
-        [Display(Name = "Ticket Price")]
         [DisplayFormat(DataFormatString = "{0:c}", ApplyFormatInEditMode = true)]
-        public double TicketPrice { get; set; }
+        public double Compensation { get; set; }
 
         //[Required]
         [Display(Name = "Public Event?")]

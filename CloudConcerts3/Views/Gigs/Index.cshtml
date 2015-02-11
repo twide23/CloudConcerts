@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CloudConcerts3.Models.Gig>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Gigs for <b>@User.Identity.Name</b></h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Host.VenueName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Compensation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isPublic)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Host.VenueName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Compensation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isPublic)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GigID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GigID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GigID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -36,5 +36,7 @@ namespace CloudConcerts3.DAL
             modelBuilder.Entity<Listener>().ToTable("Listeners");
 
         }
+
+        public System.Data.Entity.DbSet<CloudConcerts3.Models.Gig> Gigs { get; set; }
     }
 }
