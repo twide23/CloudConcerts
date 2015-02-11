@@ -193,6 +193,16 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery-frontier-cal-1.3.2.css" />
+    <Content Include="Content\jquery-ui-1.8.1.custom.css" />
+    <Content Include="Scripts\calendarscript.js" />
+    <Content Include="Scripts\jquery-1.4.2-ie-fix.min.js" />
+    <Content Include="Scripts\jquery-frontier-cal-1.3.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.1.custom.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.qtip-1.0.js" />
+    <Content Include="Scripts\jshashtable-2.1.js" />
+    <Content Include="Scripts\myscript.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -280,10 +290,17 @@
     <Content Include="Views\ProfilePartials\_ArtistProfile.cshtml" />
     <Content Include="Views\ProfilePartials\_HostProfile.cshtml" />
     <Content Include="Views\ProfilePartials\_ListenerProfile.cshtml" />
+    <Content Include="Views\Browse\Artists.cshtml" />
+    <Content Include="Views\Browse\Hosts.cshtml" />
+    <Content Include="Views\Browse\Concerts.cshtml" />
+    <Content Include="Views\Browse\Index.cshtml" />
+    <Content Include="Views\RegisterPartials\_ArtistRegisterPartial.cshtml" />
+    <Content Include="Views\RegisterPartials\_HostRegisterPartial.cshtml" />
+    <Content Include="Views\RegisterPartials\_ListenerRegisterPartial.cshtml" />
+    <Content Include="Views\Browse\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Views\Browse\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

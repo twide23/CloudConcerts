@@ -10,12 +10,15 @@ namespace CloudConcerts3.Models
     {
         public int MemberID { get; set; }
 
+        //[Required]
         [Display(Name = "First Name")]
         public String FirstName { get; set; }
 
+        //[Required]
         [Display(Name = "Last Name")]
         public String LastName { get; set; }
 
+        //[Required]
         public String Instrument { get; set; }
     }
 }

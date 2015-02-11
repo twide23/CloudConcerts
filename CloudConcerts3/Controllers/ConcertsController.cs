@@ -83,7 +83,7 @@ namespace CloudConcerts3.Controllers
         // GET: Concerts/Create
         public ActionResult Create()
         {
-            ViewBag.HostID = new SelectList(db.Hosts, "HostID", "VenueName");
+            ViewBag.HostID = new SelectList(db.Hosts, "Id", "VenueName");
             return View();
         }
 
@@ -92,7 +92,7 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ConcertID,HostID,Time,Date,Description,TicketPrice,isPublic")] Concert concert)
+        public ActionResult Create([Bind(Include = "ConcertID,HostID,Name,Time,Date,Description,TicketPrice,isPublic")] Concert concert)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +101,7 @@ namespace CloudConcerts3.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.HostID = new SelectList(db.Hosts, "HostID", "VenueName", concert.HostID);
+            ViewBag.HostID = new SelectList(db.Hosts, "Id", "VenueName", concert.HostID);
             return View(concert);
         }
 
@@ -117,7 +117,7 @@ namespace CloudConcerts3.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.HostID = new SelectList(db.Hosts, "HostID", "VenueName", concert.HostID);
+            ViewBag.HostID = new SelectList(db.Hosts, "Id", "VenueName", concert.HostID);
             return View(concert);
         }
 
@@ -126,7 +126,7 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ConcertID,HostID,Time,Date,Description,TicketPrice,isPublic")] Concert concert)
+        public ActionResult Edit([Bind(Include = "ConcertID,HostID,Name,Time,Date,Description,TicketPrice,isPublic")] Concert concert)
         {
             if (ModelState.IsValid)
             {
@@ -134,7 +134,7 @@ namespace CloudConcerts3.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.HostID = new SelectList(db.Hosts, "HostID", "VenueName", concert.HostID);
+            ViewBag.HostID = new SelectList(db.Hosts, "Id", "VenueName", concert.HostID);
             return View(concert);
         }
 

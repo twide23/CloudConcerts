@@ -10,12 +10,14 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CloudConcerts3.Models;
 using System.Collections.Generic;
+using CloudConcerts3.DAL;
 
 namespace CloudConcerts3.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private MusicContext3 db = new MusicContext3();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -23,7 +25,7 @@ namespace CloudConcerts3.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -35,9 +37,9 @@ namespace CloudConcerts3.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -121,7 +123,7 @@ namespace CloudConcerts3.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -140,14 +142,9 @@ namespace CloudConcerts3.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            List<SelectListItem> myList = new List<SelectListItem>();
-            myList.Add(new SelectListItem { Value = "Artist", Text = "Artist" });
-            myList.Add(new SelectListItem { Value = "Host", Text = "Host" });
-            myList.Add(new SelectListItem { Value = "Listener", Text = "Listener" });
+            PopulateStates();
 
-            var choices = new SelectList(myList, "Value", "Text");
-
-            ViewBag.Choices = choices;
+            ViewBag.ArtistGenreID = new SelectList(db.Genres, "GenreID", "Name");
 
             return View();
         }
@@ -161,27 +158,52 @@ namespace CloudConcerts3.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var userType = model.Type;
 
                 if (userType == "Artist")
                 {
-                    user = new Artist { UserName = model.Email, Email = model.Email, GenreID = 1 };
+                    user = new Artist
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        StageName = model.ArtistStageName,
+                        Description = model.ArtistDescription,
+                        GenreID = model.ArtistGenreID
+                    };
                 }
                 else if (userType == "Host")
                 {
-                    user = new Host { UserName = model.Email, Email = model.Email };
+                    user = new Host
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        VenueName = model.HostVenueName,
+                        Description = model.HostDescription,
+                        Address = model.HostAddress,
+                        Phone = model.HostPhone,
+                        Website = model.HostWebsite
+                    };
                 }
                 else if (userType == "Listener")
                 {
-                    user = new Listener { UserName = model.Email, Email = model.Email };
+                    user = new Listener
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        FirstName = model.ListenerFirstName,
+                        LastName = model.ListenerLastName,
+                        City = model.ListenerCity,
+                        State = model.ListenerState
+                    };
                 }
-                
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -195,14 +217,8 @@ namespace CloudConcerts3.Controllers
 
             // If we got this far, something failed, redisplay form
             //Need to call everything we called in GET:/Account/Register
-            List<SelectListItem> myList = new List<SelectListItem>();
-            myList.Add(new SelectListItem { Value = "Artist", Text = "Artist" });
-            myList.Add(new SelectListItem { Value = "Host", Text = "Host" });
-            myList.Add(new SelectListItem { Value = "Listener", Text = "Listener" });
-
-            var choices = new SelectList(myList, "Value", "Text");
-
-            ViewBag.Choices = choices;
+            PopulateStates();
+            ViewBag.ArtistGenreID = new SelectList(db.Genres, "GenreID", "Name");
             return View(model);
         }
 
@@ -458,6 +474,64 @@ namespace CloudConcerts3.Controllers
         }
 
         #region Helpers
+        private void PopulateStates()
+        {
+            List<SelectListItem> states = new List<SelectListItem>();
+            states.Add(new SelectListItem { Value = "AL", Text = "AL" });
+            states.Add(new SelectListItem { Value = "AK", Text = "AK" });
+            states.Add(new SelectListItem { Value = "AZ", Text = "AZ" });
+            states.Add(new SelectListItem { Value = "AR", Text = "AR" });
+            states.Add(new SelectListItem { Value = "CA", Text = "CA" });
+            states.Add(new SelectListItem { Value = "CO", Text = "CO" });
+            states.Add(new SelectListItem { Value = "CT", Text = "CT" });
+            states.Add(new SelectListItem { Value = "DE", Text = "DE" });
+            states.Add(new SelectListItem { Value = "FL", Text = "FL" });
+            states.Add(new SelectListItem { Value = "GA", Text = "GA" });
+            states.Add(new SelectListItem { Value = "HI", Text = "HI" });
+            states.Add(new SelectListItem { Value = "ID", Text = "ID" });
+            states.Add(new SelectListItem { Value = "IL", Text = "IL" });
+            states.Add(new SelectListItem { Value = "IN", Text = "IN" });
+            states.Add(new SelectListItem { Value = "IA", Text = "IA" });
+            states.Add(new SelectListItem { Value = "KS", Text = "KS" });
+            states.Add(new SelectListItem { Value = "KY", Text = "KY" });
+            states.Add(new SelectListItem { Value = "LA", Text = "LA" });
+            states.Add(new SelectListItem { Value = "ME", Text = "ME" });
+            states.Add(new SelectListItem { Value = "MD", Text = "MD" });
+            states.Add(new SelectListItem { Value = "MA", Text = "MA" });
+            states.Add(new SelectListItem { Value = "MI", Text = "MI" });
+            states.Add(new SelectListItem { Value = "MN", Text = "MN" });
+            states.Add(new SelectListItem { Value = "MS", Text = "MS" });
+            states.Add(new SelectListItem { Value = "MO", Text = "MO" });
+            states.Add(new SelectListItem { Value = "MT", Text = "MT" });
+            states.Add(new SelectListItem { Value = "NE", Text = "NE" });
+            states.Add(new SelectListItem { Value = "NV", Text = "NV" });
+            states.Add(new SelectListItem { Value = "NH", Text = "NH" });
+            states.Add(new SelectListItem { Value = "NJ", Text = "NJ" });
+            states.Add(new SelectListItem { Value = "NM", Text = "NM" });
+            states.Add(new SelectListItem { Value = "NY", Text = "NY" });
+            states.Add(new SelectListItem { Value = "NC", Text = "NC" });
+            states.Add(new SelectListItem { Value = "ND", Text = "ND" });
+            states.Add(new SelectListItem { Value = "OH", Text = "OH" });
+            states.Add(new SelectListItem { Value = "OK", Text = "OK" });
+            states.Add(new SelectListItem { Value = "OR", Text = "OR" });
+            states.Add(new SelectListItem { Value = "PA", Text = "PA" });
+            states.Add(new SelectListItem { Value = "RI", Text = "RI" });
+            states.Add(new SelectListItem { Value = "SC", Text = "SC" });
+            states.Add(new SelectListItem { Value = "SD", Text = "SD" });
+            states.Add(new SelectListItem { Value = "TN", Text = "TN" });
+            states.Add(new SelectListItem { Value = "TX", Text = "TX" });
+            states.Add(new SelectListItem { Value = "UT", Text = "UT" });
+            states.Add(new SelectListItem { Value = "VT", Text = "VT" });
+            states.Add(new SelectListItem { Value = "VA", Text = "VA" });
+            states.Add(new SelectListItem { Value = "WA", Text = "WA" });
+            states.Add(new SelectListItem { Value = "WV", Text = "WV" });
+            states.Add(new SelectListItem { Value = "WI", Text = "WI" });
+            states.Add(new SelectListItem { Value = "WY", Text = "WY" });
+
+            var statesList = new SelectList(states, "Value", "Text");
+            ViewBag.ListenerState = statesList;
+        }
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

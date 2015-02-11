@@ -6,7 +6,6 @@
 
 <h2>Hosts</h2>
 
-
 @using (Html.BeginForm())
 {
     <p>
@@ -18,7 +17,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Venue", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Venue", "Hosts", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -35,7 +34,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -57,11 +55,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

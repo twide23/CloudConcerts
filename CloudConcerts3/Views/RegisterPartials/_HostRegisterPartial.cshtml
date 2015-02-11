@@ -1,0 +1,36 @@
+﻿@model CloudConcerts3.Models.RegisterViewModel
+
+<div class="form-group">
+    @Html.LabelFor(m => m.HostVenueName, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.HostVenueName, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.HostDescription, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.HostDescription, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.HostAddress, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.HostAddress, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.HostPhone, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.HostPhone, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.HostWebsite, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.HostWebsite, new { @class = "form-control" })
+    </div>
+</div>

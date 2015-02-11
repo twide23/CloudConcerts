@@ -15,13 +15,36 @@
     /*  Select the type of user  */
     <div class="form-group">
         @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownList("Type", @ViewBag.Choices as SelectList, "")
+        @*<div class="col-md-10">
+            @Html.DropDownList("Type", @ViewBag.Choices as SelectList, " - Please Select One - ", htmlAttributes: new { @id = "music_enthu_type"})
+        </div>*@
+        @Html.TextBoxFor(m => m.Type, new { @id = "user_music_type", @class = "form-control", style = "display: none;" })
+
+        <div class="btn-group col-md-10">
+            <button id="music_enthu_type" name="MusicType" type="button" class="btn btn-info" data-toggle="dropdown"> - Please Select One - </button>
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a onclick="chooseArtist()">Artist</a></li>
+                <li><a onclick="chooseHost()">Host</a></li>
+                <li><a onclick="chooseListener()">Listener</a></li>
+            </ul>
         </div>
     </div>
-    
+
     /*  Render different partial views based on which type is picked in dropdown  */
-    
+    <div id="artist_register" style="display:none;">
+        @Html.Partial("~/Views/RegisterPartials/_ArtistRegisterPartial.cshtml")
+    </div>
+    <div id="host_register" style="display:none;">
+        @Html.Partial("~/Views/RegisterPartials/_HostRegisterPartial.cshtml")
+    </div>
+    <div id="listener_register" style="display:none;">
+        @Html.Partial("~/Views/RegisterPartials/_ListenerRegisterPartial.cshtml")
+    </div>
+    <hr />
 
     /*  Every type of user will have an email and password field  */
     <div class="form-group">

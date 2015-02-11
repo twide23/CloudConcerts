@@ -64,9 +64,55 @@ namespace CloudConcerts3.Models
 
     public class RegisterViewModel
     {
-        [Required]
         [Display(Name = "Type of Account")]
         public string Type { get; set; }
+
+        /*********** Artist form ************/
+        [Display(Name = "Stage Name")]
+        public string ArtistStageName { get; set; }
+
+        [Display(Name = "Description")]
+        public string ArtistDescription { get; set; }
+
+        //[Required]
+        public int ArtistGenreID { get; set; }
+
+        [Display(Name = "Genre")]
+        public virtual Genre ArtistGenre { get; set; }
+        /*********** END Artist form ************/
+
+        /*********** Host form ************/
+        [Display(Name = "Venue Name")]
+        public string HostVenueName { get; set; }
+
+        [Display(Name = "Description")]
+        public string HostDescription { get; set; }
+
+        [Display(Name = "Address")]
+        public string HostAddress { get; set; }
+
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string HostPhone { get; set; }
+
+        [Url]
+        [Display(Name = "Website")]
+        public string HostWebsite { get; set; }
+        /*********** END Host form ************/
+
+        /*********** Listener form ************/
+        [Display(Name = "First Name")]
+        public string ListenerFirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string ListenerLastName { get; set; }
+
+        [Display(Name = "City")]
+        public string ListenerCity { get; set; }
+
+        [Display(Name = "State")]
+        public string ListenerState { get; set; }
+        /*********** END Listener form ************/
 
         [Required]
         [EmailAddress]

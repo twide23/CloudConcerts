@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CloudConcerts3.Models.Concert>
+
+@{
+    ViewBag.Title = "Concerts";
+}
+
+<h2>Concerts</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Name", "Concerts", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Venue", "Concerts", new { sortOrder = ViewBag.VenueSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.ActionLink("Date", "Concerts", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.ActionLink("Ticket Price", "Concerts", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.isPublic)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Host.VenueName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketPrice)
+                </td>
+            </tr>
+        }
+    }
+
+</table>

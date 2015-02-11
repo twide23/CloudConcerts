@@ -12,7 +12,19 @@ namespace CloudConcerts3.DAL
             {
             new Genre{Name="Alternative"},
             new Genre{Name="Blues"},
-            new Genre{Name="Classical"}
+            new Genre{Name="Classical"},
+            new Genre{Name="Country"},
+            new Genre{Name="Electronic"},
+            new Genre{Name="Folk"},
+            new Genre{Name="Hip-Hop/Rap"},
+            new Genre{Name="Indie"},
+            new Genre{Name="Jazz"},
+            new Genre{Name="Latin"},
+            new Genre{Name="Metal"},
+            new Genre{Name="Pop"},
+            new Genre{Name="R&B/Soul"},
+            new Genre{Name="Reggae"},
+            new Genre{Name="Rock"}
             };
             genres.ForEach(s => context.Genres.Add(s));
             context.SaveChanges();
@@ -49,9 +61,9 @@ namespace CloudConcerts3.DAL
 
             var concerts = new List<Concert>
             {
-            new Concert{Name="Music-palooza", HostID=1, Time=DateTime.Parse("6:00AM"), Date=DateTime.Parse("09-01-2015"), Description="LIVE MUSIC", TicketPrice=20, isPublic=true},
-            new Concert{Name="Music-fest", HostID=2, Time=DateTime.Parse("10:00PM"), Date=DateTime.Parse("02-14-2015"), Description="Smooth listening", TicketPrice=10, isPublic=true},
-            new Concert{Name="Brangelina", HostID=3, Time=DateTime.Parse("1:00PM"), Date=DateTime.Parse("05-05-2015"), Description="For a wedding", TicketPrice=0, isPublic=false}
+            new Concert{Name="Music-palooza", Time=DateTime.Parse("6:00AM"), Date=DateTime.Parse("09-01-2015"), Description="LIVE MUSIC", TicketPrice=20, isPublic=true},
+            new Concert{Name="Music-fest", Time=DateTime.Parse("10:00PM"), Date=DateTime.Parse("02-14-2015"), Description="Smooth listening", TicketPrice=10, isPublic=true},
+            new Concert{Name="Brangelina", Time=DateTime.Parse("1:00PM"), Date=DateTime.Parse("05-05-2015"), Description="For a wedding", TicketPrice=0, isPublic=false}
             };
             concerts.ForEach(s => context.Concerts.Add(s));
             context.SaveChanges();
