@@ -1,4 +1,4 @@
-﻿@model CloudConcerts3.Models.ApplicationUser
+﻿@model CloudConcerts3.Models.AspNetUser
 @using Microsoft.AspNet.Identity;
 
 @{
@@ -9,34 +9,38 @@
     <h1>Cloud Concerts</h1>
     <p class="lead">Cloud Concerts helps venues find artists and helps listeners find concerts.</p>
 
-    @if (User.IsInRole("admin"))
+    @if (Model == null)
     {
-        <p>Logged in as an ADMIN</p>
-    }
-    else if (Model is CloudConcerts3.Models.Host)
-    {
-        @*Add a link for "artists" here*@
-        <p>Do you have an upcoming event and need a performer?</p>
-        <p>
-            <a href="@Url.Action("Create", "Gigs")" class="btn btn-primary btn-lg">Create a gig &raquo;</a>
-            <a href="@Url.Action("Index", "Gigs")" class="btn btn-primary btn-lg">View my gigs &raquo;</a>
-        </p>
-    }
-    else if (Model is CloudConcerts3.Models.Artist)
-    {
-        <p>Logged in as an ARTIST</p>
-        @*Add a link for "hosts/gigs" here
-            <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>*@
-    }
-    else if (Model is CloudConcerts3.Models.Listener)
-    {
-        <p>Logged in as a LISTENER</p>
-        @*Add a link for "concerts" here
-            <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>*@
+        <p><a href="@Url.Action("Register", "Account")" class="btn btn-info btn-lg">Sign Up Today &raquo;</a></p>
     }
     else
     {
-        <p><a href="@Url.Action("Register", "Account")" class="btn btn-primary btn-lg">Sign Up Today &raquo;</a></p>
+        if (User.IsInRole("admin"))
+        {
+            <p>Logged in as an ADMIN</p>
+        }
+        else if (Model.Type == "Host")
+        {
+            @*Add a link for "artists" here*@
+            <p>Do you have an upcoming event and need a performer?</p>
+            <p>
+                <a href="@Url.Action("Create", "Gigs")" class="btn btn-primary btn-lg">Create a gig &raquo;</a>
+                <a href="@Url.Action("Index", "Gigs")" class="btn btn-primary btn-lg">View my gigs &raquo;</a>
+            </p>
+        }
+        else if (Model.Type == "Artist")
+        {
+            <p>Logged in as an ARTIST</p>
+            @*Add a link for "hosts/gigs" here*@
+            <p><a href="@Url.Action("Apply", "Gigs")" class="btn btn-primary btn-lg">Find a gig &raquo;</a></p>
+        }
+        else if (Model.Type == "Listener")
+        {
+            <p>Logged in as a LISTENER</p>
+            @*Add a link for "concerts" here*@
+            <p><a href="@Url.Action("Index", "Concerts")" class="btn btn-primary btn-lg">Find concerts &raquo;</a></p>
+        }
+
     }
 
 </div>

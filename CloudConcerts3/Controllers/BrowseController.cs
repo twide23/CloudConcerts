@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using CloudConcerts3.DAL;
 using CloudConcerts3.Models;
-using System.Web.Services;
+using System.Collections.Generic;
 
 namespace CloudConcerts3.Controllers
 {
     public class BrowseController : Controller
     {
-        private MusicContext3 db = new MusicContext3();
+        private CloudConcertsDataEntities db = new CloudConcertsDataEntities();
 
         // GET: Browse
         public ActionResult Index()
@@ -115,10 +112,10 @@ namespace CloudConcerts3.Controllers
                     concerts = concerts.OrderByDescending(s => s.Host.VenueName);
                     break;
                 case "Date":
-                    concerts = concerts.OrderBy(s => s.Date);
+                    concerts = concerts.OrderBy(s => s.StartTime);
                     break;
                 case "date_desc":
-                    concerts = concerts.OrderByDescending(s => s.Date);
+                    concerts = concerts.OrderByDescending(s => s.StartTime);
                     break;
                 case "Price":
                     concerts = concerts.OrderBy(s => s.TicketPrice);
@@ -145,10 +142,15 @@ namespace CloudConcerts3.Controllers
         [HttpPost]
         public ActionResult ViewConcerts()
         {
-            MusicContext3 concertDB = new MusicContext3();
-            var concerts = from s in concertDB.Concerts
-                           select s;
-            return Json(concerts.ToList());
+            var concerts = db.Concerts.Where(c => c.isPublic.Equals(true)).ToList();
+            List<ConcertViewModel> ConcertVMS = new List<ConcertViewModel>();
+            foreach (var c in concerts)
+            {
+                var cvm = CloudConcerts3.Models.ModelMapper.ConvertToConcertViewModel(c);
+                ConcertVMS.Add(cvm);
+            }
+
+            return Json(ConcertVMS.ToArray());
         }
     }
 }

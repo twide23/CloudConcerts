@@ -21,18 +21,21 @@
             type: "POST",
             url: "/Browse/ViewConcerts", 
             success: function (data) {
-                //alert(data[0].Description);
                 for (var i = 0; i < data.length; i++) {
+                    var startdatetime = new Date(parseInt((data[i].StartTime).replace("/Date(", "").replace(")/", ""), 10));
+                    startdatetime.setHours(startdatetime.getHours() + 5);
+                    var enddatetime = new Date(parseInt((data[i].EndTime).replace("/Date(", "").replace(")/", ""), 10));
+                    enddatetime.setHours(enddatetime.getHours() + 5);
                     jfcalplugin.addAgendaItem(
                         "#mycal",
                         data[i].Name,
-                        new Date(2015, i, 15, 20, 0, 0, 0),
-                        new Date(2015, i, 15, 23, 59, 59, 999),
+                        startdatetime,
+                        enddatetime,
                         false,
                         {
-                            //Venue: data[0].Host.VenueName,
-                            Time: data[i].Time,
-                            Description: data[i].Description
+                            Tickets: "$" + data[i].TicketPrice,
+                            Description: data[i].Description,
+                            Venue: data[i].HostName
                         },
                         {
                             backgroundColor: "#AA00FF",
@@ -67,17 +70,23 @@
                     var allDay = clickAgendaItem.allDay;
                     var data = clickAgendaItem.data;
                     // in our example add agenda modal form we put some fake data in the agenda data. we can retrieve it here.
-                    $("#display-event-form").append(
-                        "<br><b>" + title + "</b><br><br>"
+
+                    $("#ui-dialog-title-display-event-form").html(
+                        "<b>" + title + "</b>"
                     );
                     if (allDay) {
                         $("#display-event-form").append(
                             "(All day event)<br><br>"
                         );
                     } else {
+                        var startHours = ((startDate.getHours() + 11) % 12) + 1;
+                        var startAmPm = startDate.getHours() > 11 ? 'PM' : 'AM';
+                        var endHours = ((endDate.getHours() + 11) % 12) + 1;
+                        var endAmPm = endDate.getHours() > 11 ? 'PM' : 'AM';
                         $("#display-event-form").append(
-                            "<b>Starts:</b> " + startDate + "<br>" +
-                            "<b>Ends:</b> " + endDate + "<br><br>"
+                            "<b>Date:</b> " + (startDate.getMonth() + 1) + "-" + startDate.getDate() + "-" + startDate.getFullYear() + "<br>" +
+                            "<b>Start Time:</b> " + startHours + ":" + (startDate.getMinutes() < 10 ? '0' : '') + startDate.getMinutes() + " " + startAmPm + "<br>" +
+                            "<b>End Time:</b> " + endHours + ":" + (startDate.getMinutes() < 10 ? '0' : '') + startDate.getMinutes() + " " + endAmPm + "<br>"
                         );
                     }
                     for (var propertyName in data) {
@@ -176,11 +185,17 @@
         var endDate = agendaItem.endDate;
         var allDay = agendaItem.allDay;
         var data = agendaItem.data;
-        displayData += "<br><b>" + title + "</b><br><br>";
+        displayData += "<b>" + title + "</b><br><br>";
         if (allDay) {
             displayData += "(All day event)<br><br>";
         } else {
-            displayData += "<b>Starts:</b> " + startDate + "<br>" + "<b>Ends:</b> " + endDate + "<br><br>";
+            var startHours = ((startDate.getHours() + 11) % 12) + 1;
+            var startAmPm = startDate.getHours() > 11 ? 'PM' : 'AM';
+            var endHours = ((endDate.getHours() + 11) % 12) + 1;
+            var endAmPm = endDate.getHours() > 11 ? 'PM' : 'AM';
+            displayData += "<b>Date:</b> " + (startDate.getMonth() + 1) + "-" + startDate.getDate() + "-" + startDate.getFullYear() + "<br>" +
+                            "<b>Start Time:</b> " + startHours + ":" + (startDate.getMinutes() < 10 ? '0' : '') + startDate.getMinutes() + " " + startAmPm + "<br>" +
+                            "<b>End Time:</b> " + endHours + ":" + (startDate.getMinutes() < 10 ? '0' : '') + startDate.getMinutes() + " " + endAmPm + "<br>";
         }
         for (var propertyName in data) {
             displayData += "<b>" + propertyName + ":</b> " + data[propertyName] + "<br>"

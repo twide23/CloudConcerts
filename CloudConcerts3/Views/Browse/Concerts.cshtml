@@ -24,9 +24,6 @@
             @Html.ActionLink("Venue", "Concerts", new { sortOrder = ViewBag.VenueSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Time)
-        </th>
-        <th>
             @Html.ActionLink("Date", "Concerts", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
@@ -39,7 +36,7 @@
 
     @foreach (var item in Model)
     {
-        if (item.isPublic)
+        if (item.isPublic == true)
         {
             <tr>
                 <td>
@@ -49,10 +46,7 @@
                     @Html.DisplayFor(modelItem => item.Host.VenueName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
+                    @Html.DisplayFor(modelItem => item.StartTime)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)

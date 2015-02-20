@@ -1,6 +1,14 @@
 ﻿@model CloudConcerts3.Models.Host
 @using Microsoft.AspNet.Identity;
 
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<hr />
+
 <p>Partial Host Profile View</p>
 <p>From model:   @Html.DisplayFor(m => m.Id)</p>
 <p>Current User: @User.Identity.GetUserId()</p>
@@ -46,14 +54,6 @@
 
     <dd>
         @Html.DisplayFor(model => model.Website)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.Email)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.Email)
     </dd>
 
 </dl>

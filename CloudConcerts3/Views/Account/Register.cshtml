@@ -15,9 +15,6 @@
     /*  Select the type of user  */
     <div class="form-group">
         @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
-        @*<div class="col-md-10">
-            @Html.DropDownList("Type", @ViewBag.Choices as SelectList, " - Please Select One - ", htmlAttributes: new { @id = "music_enthu_type"})
-        </div>*@
         @Html.TextBoxFor(m => m.Type, new { @id = "user_music_type", @class = "form-control", style = "display: none;" })
 
         <div class="btn-group col-md-10">
@@ -67,7 +64,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Sign Up" />
+            <input type="submit" class="btn btn-info" value="Sign Up" />
         </div>
     </div>
 }

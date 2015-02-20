@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a7d42d5120c45439b7697aea342b216" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="CloudConcertsDataModel.C__MigrationHistory" Width="1.5" PointX="14" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.Artist" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.ArtistConcert" Width="1.5" PointX="10.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.ArtistGig" Width="1.5" PointX="21.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.AspNetRole" Width="1.5" PointX="0.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.AspNetUserClaim" Width="1.5" PointX="5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.AspNetUserLogin" Width="1.5" PointX="5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.AspNetUser" Width="1.5" PointX="2.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.Concert" Width="1.5" PointX="7.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.Genre" Width="1.5" PointX="5.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.Gig" Width="1.5" PointX="18.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.GigGenre" Width="1.5" PointX="20.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.Host" Width="1.5" PointX="16.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.Instrument" Width="1.5" PointX="8" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.Listener" Width="1.5" PointX="16.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.ListenerArtist" Width="1.5" PointX="23.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.ListenerGenre" Width="1.5" PointX="18.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudConcertsDataModel.Member" Width="1.5" PointX="10.25" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_Artist_dbo_AspNetUsers_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_Artist_dbo_Genre_GenreID" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_ArtistConcert_dbo_Artist_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_ArtistGig_dbo_Artist_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_ListenerArtist_dbo_Artist_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_Member_dbo_Artist_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_ArtistConcert_dbo_Concert_ConcertID" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_ArtistGig_dbo_Gig_GigID" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_Host_dbo_AspNetUsers_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_Listener_dbo_AspNetUsers_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_Concert_dbo_Host_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_GigGenre_dbo_Genre_GenreID" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_ListenerGenre_dbo_Genre_GenreID" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_Gig_dbo_Host_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_GigGenre_dbo_Gig_GigID" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_Member_dbo_Instrument_InstrumentID" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_ListenerArtist_dbo_Listener_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.FK_dbo_ListenerGenre_dbo_Listener_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="CloudConcertsDataModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,27 +1,18 @@
 ﻿@model IEnumerable<CloudConcerts3.Models.Genre>
 
 @{
-    ViewBag.Title = "Genres";
+    ViewBag.Title = "Index";
 }
 
-<h2>Genres</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-@using (Html.BeginForm())
-{
-    <p>
-        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" />
-    </p>
-}
-
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th></th>
     </tr>

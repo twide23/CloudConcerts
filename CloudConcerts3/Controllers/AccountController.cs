@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CloudConcerts3.Models;
 using System.Collections.Generic;
-using CloudConcerts3.DAL;
+//using CloudConcerts3.DAL;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CloudConcerts3.Controllers
@@ -18,7 +18,8 @@ namespace CloudConcerts3.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private MusicContext3 db = new MusicContext3();
+        private CloudConcertsDataEntities db = new CloudConcertsDataEntities();
+        private ApplicationDbContext appdb = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -160,63 +161,74 @@ namespace CloudConcerts3.Controllers
             if (ModelState.IsValid)
             {
 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var userType = model.Type;
-
-                if (userType == "Artist")
-                {
-                    user = new Artist
-                    {
-                        UserName = model.Email,
-                        Email = model.Email,
-                        StageName = model.ArtistStageName,
-                        Description = model.ArtistDescription,
-                        GenreID = model.ArtistGenreID
-                    };
-                }
-                else if (userType == "Host")
-                {
-                    user = new Host
-                    {
-                        UserName = model.Email,
-                        Email = model.Email,
-                        VenueName = model.HostVenueName,
-                        Description = model.HostDescription,
-                        Address = model.HostAddress,
-                        Phone = model.HostPhone,
-                        Website = model.HostWebsite
-                    };
-                }
-                else if (userType == "Listener")
-                {
-                    user = new Listener
-                    {
-                        UserName = model.Email,
-                        Email = model.Email,
-                        FirstName = model.ListenerFirstName,
-                        LastName = model.ListenerLastName,
-                        City = model.ListenerCity,
-                        State = model.ListenerState
-                    };
-                }
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Type = userType };
 
                 //Create a new user
                 var result = await UserManager.CreateAsync(user, model.Password);
 
-                if (userType == "Host")
-                {
-                    var roleStore = new RoleStore<IdentityRole>(db);
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    if (!roleManager.RoleExists("host"))
-                    {
-                        roleManager.Create(new IdentityRole("host"));
-                    }
-
-                    UserManager.AddToRole(user.Id, "host");
-                }
-
                 if (result.Succeeded)
                 {
+                    if (userType == "Artist")
+                    {
+                        var art = new Artist()
+                        {
+                            Id = user.Id,
+                            StageName = model.ArtistStageName,
+                            Description = model.ArtistDescription,
+                            GenreID = model.ArtistGenreID,
+                            ImageURL = model.ImageURL
+                        };
+                        db.Artists.Add(art);
+                        db.SaveChanges();
+                        var roleStore = new RoleStore<IdentityRole>(appdb);
+                        var roleManager = new RoleManager<IdentityRole>(roleStore);
+                        if (!roleManager.RoleExists("artist"))
+                        {
+                            roleManager.Create(new IdentityRole("artist"));
+                        }
+
+                        UserManager.AddToRole(user.Id, "artist");
+                    }
+                    else if (userType == "Host")
+                    {
+                        var host = new Host
+                        {
+                            Id = user.Id,
+                            VenueName = model.HostVenueName,
+                            Description = model.HostDescription,
+                            Address = model.HostAddress,
+                            Phone = model.HostPhone,
+                            Website = model.HostWebsite,
+                            ImageURL = model.ImageURL
+                        };
+                        db.Hosts.Add(host);
+                        db.SaveChanges();
+                        var roleStore = new RoleStore<IdentityRole>(appdb);
+                        var roleManager = new RoleManager<IdentityRole>(roleStore);
+                        if (!roleManager.RoleExists("host"))
+                        {
+                            roleManager.Create(new IdentityRole("host"));
+                        }
+
+                        UserManager.AddToRole(user.Id, "host");
+                    }
+                    else if (userType == "Listener")
+                    {
+                        var listener = new Listener
+                        {
+                            Id = user.Id,
+                            FirstName = model.ListenerFirstName,
+                            LastName = model.ListenerLastName,
+                            City = model.ListenerCity,
+                            State = model.ListenerState,
+                            ImageURL = model.ImageURL
+                        };
+                        db.Listeners.Add(listener);
+                        db.SaveChanges();
+                    }
+
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

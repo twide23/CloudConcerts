@@ -1,39 +1,27 @@
 ﻿@model IEnumerable<CloudConcerts3.Models.Listener>
 
 @{
-    ViewBag.Title = "Listeners";
+    ViewBag.Title = "Index";
 }
 
-<h2>Listeners</h2>
+<h2>Index</h2>
 
-@*<p>
+<p>
     @Html.ActionLink("Create New", "Create")
-</p>*@
-
-@using (Html.BeginForm())
-{
-    <p>
-        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" />
-    </p>
-}
-
+</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.City)
         </th>
         <th>
-            @Html.ActionLink("State", "Index", new { sortOrder = ViewBag.StateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.State)
         </th>
         <th></th>
     </tr>
@@ -53,12 +41,9 @@
             @Html.DisplayFor(modelItem => item.State)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

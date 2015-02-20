@@ -1,4 +1,4 @@
-﻿using CloudConcerts3.DAL;
+﻿//using CloudConcerts3.DAL;
 using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -10,7 +10,6 @@ namespace CloudConcerts3
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new MusicInitializer());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

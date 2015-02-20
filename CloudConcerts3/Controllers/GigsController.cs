@@ -6,18 +6,17 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using CloudConcerts3.DAL;
 using CloudConcerts3.Models;
 using Microsoft.AspNet.Identity;
 
 namespace CloudConcerts3.Controllers
 {
-    [Authorize(Roles = "admin, host")]
     public class GigsController : Controller
     {
-        private MusicContext3 db = new MusicContext3();
+        private CloudConcertsDataEntities db = new CloudConcertsDataEntities();
 
         // GET: Gigs
+        [Authorize(Roles = "admin, host")]
         public ActionResult Index()
         {
             var gigs = db.Gigs.Include(g => g.Host);
@@ -33,6 +32,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Gigs/Details/5
+        [Authorize(Roles = "admin, host")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -54,6 +54,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Gigs/Create
+        [Authorize(Roles = "admin, host")]
         public ActionResult Create()
         {
             return View();
@@ -64,6 +65,7 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, host")]
         public ActionResult Create([Bind(Include = "GigID,Name,Time,Date,Description,Compensation,isPublic")] Gig gig)
         {
             if (ModelState.IsValid)
@@ -78,6 +80,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Gigs/Edit/5
+        [Authorize(Roles = "admin, host")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -103,6 +106,7 @@ namespace CloudConcerts3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin, host")]
         public ActionResult Edit([Bind(Include = "GigID,Name,Time,Date,Description,Compensation,isPublic")] Gig gig)
         {
             if (ModelState.IsValid)
@@ -116,6 +120,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // GET: Gigs/Delete/5
+        [Authorize(Roles = "admin, host")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -137,6 +142,7 @@ namespace CloudConcerts3.Controllers
         }
 
         // POST: Gigs/Delete/5
+        [Authorize(Roles = "admin, host")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -155,5 +161,56 @@ namespace CloudConcerts3.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Gigs/Apply
+        [Authorize(Roles = "admin, artist")]
+        public ActionResult Apply()
+        {
+            var gigs = db.Gigs.Include(g => g.Host);
+            List<GigViewModel> gigvms = new List<GigViewModel>();
+
+            foreach (Gig g in gigs)
+            {
+                GigViewModel gigvm = CloudConcerts3.Models.ModelMapper.ConvertToGigViewModel(g);
+                var foundApplication = db.ArtistGigs.Where(a => a.ArtistID.Equals(User.Identity.GetUserId())).Where(gi => gi.GigID.Equals(gigvm.GigID)).First();
+                if (foundApplication != null)
+                {
+                    gigvm.hasUserApplied = true;
+                }
+
+                gigvms.Add(gigvm);
+            }
+
+            return View(gigvms);
+        }
+
+        [Authorize(Roles = "admin, artist")]
+        public ActionResult ApplyForGig(int id)
+        {
+            //Gig gig = db.Gigs.Find(id);
+            //Artist artist = db.Artists.Find(User.Identity.GetUserId());
+            //gig.Artists.Add(artist);
+
+
+            //db.SaveChanges();
+
+            var gigs = db.Gigs.Include(g => g.Host);
+            List<GigViewModel> gigvms = new List<GigViewModel>();
+
+            foreach (Gig g in gigs)
+            {
+                GigViewModel gigvm = CloudConcerts3.Models.ModelMapper.ConvertToGigViewModel(g);
+                var foundApplication = db.ArtistGigs.Where(a => a.ArtistID.Equals(User.Identity.GetUserId())).Where(gi => gi.GigID.Equals(gigvm.GigID)).First();
+                if (foundApplication != null)
+                {
+                    gigvm.hasUserApplied = true;
+                }
+
+                gigvms.Add(gigvm);
+            }
+
+            return View("Apply", gigvms);
+        }
+
     }
 }

@@ -1,0 +1,1438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CloudConcertsDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="GenreID" Type="int" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="180" />
+        </EntityType>
+        <EntityType Name="ArtistConcert">
+          <Key>
+            <PropertyRef Name="ArtistConcertID" />
+          </Key>
+          <Property Name="ArtistConcertID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArtistID" Type="nvarchar" MaxLength="128" />
+          <Property Name="ConcertID" Type="int" />
+        </EntityType>
+        <EntityType Name="ArtistGig">
+          <Key>
+            <PropertyRef Name="ArtistGigID" />
+          </Key>
+          <Property Name="ArtistGigID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArtistID" Type="nvarchar" MaxLength="128" />
+          <Property Name="GigID" Type="int" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Concert">
+          <Key>
+            <PropertyRef Name="ConcertID" />
+          </Key>
+          <Property Name="ConcertID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="HostID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="TicketPrice" Type="money" Nullable="false" />
+          <Property Name="isPublic" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Gig">
+          <Key>
+            <PropertyRef Name="GigID" />
+          </Key>
+          <Property Name="GigID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="HostID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="Compensation" Type="money" Nullable="false" />
+          <Property Name="isPublic" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GigGenre">
+          <Key>
+            <PropertyRef Name="GigGenreID" />
+          </Key>
+          <Property Name="GigGenreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GigID" Type="int" />
+          <Property Name="GenreID" Type="int" />
+        </EntityType>
+        <EntityType Name="Host">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="VenueName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Website" Type="nvarchar" MaxLength="100" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="180" />
+        </EntityType>
+        <EntityType Name="Instrument">
+          <Key>
+            <PropertyRef Name="InstrumentID" />
+          </Key>
+          <Property Name="InstrumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Listener">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="20" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="180" />
+        </EntityType>
+        <EntityType Name="ListenerArtist">
+          <Key>
+            <PropertyRef Name="ListenerArtistID" />
+          </Key>
+          <Property Name="ListenerArtistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ListenerID" Type="nvarchar" MaxLength="128" />
+          <Property Name="ArtistID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="ListenerGenre">
+          <Key>
+            <PropertyRef Name="ListenerGenreID" />
+          </Key>
+          <Property Name="ListenerGenreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ListenerID" Type="nvarchar" MaxLength="128" />
+          <Property Name="GenreID" Type="int" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="InstrumentID" Type="int" />
+          <Property Name="ArtistID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <Association Name="FK_dbo_Artist_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Artist">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Artist_dbo_Genre_GenreID">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Artist" Type="Self.Artist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Artist">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ArtistConcert_dbo_Artist_Id">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArtistConcert" Type="Self.ArtistConcert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArtistConcert">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ArtistConcert_dbo_Concert_ConcertID">
+          <End Role="Concert" Type="Self.Concert" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArtistConcert" Type="Self.ArtistConcert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Concert">
+              <PropertyRef Name="ConcertID" />
+            </Principal>
+            <Dependent Role="ArtistConcert">
+              <PropertyRef Name="ConcertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ArtistGig_dbo_Artist_Id">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArtistGig" Type="Self.ArtistGig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArtistGig">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ArtistGig_dbo_Gig_GigID">
+          <End Role="Gig" Type="Self.Gig" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArtistGig" Type="Self.ArtistGig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gig">
+              <PropertyRef Name="GigID" />
+            </Principal>
+            <Dependent Role="ArtistGig">
+              <PropertyRef Name="GigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Concert_dbo_Host_Id">
+          <End Role="Host" Type="Self.Host" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Concert" Type="Self.Concert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Concert">
+              <PropertyRef Name="HostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Gig_dbo_Host_Id">
+          <End Role="Host" Type="Self.Host" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Gig" Type="Self.Gig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gig">
+              <PropertyRef Name="HostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GigGenre_dbo_Genre_GenreID">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GigGenre" Type="Self.GigGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="GigGenre">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GigGenre_dbo_Gig_GigID">
+          <End Role="Gig" Type="Self.Gig" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GigGenre" Type="Self.GigGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gig">
+              <PropertyRef Name="GigID" />
+            </Principal>
+            <Dependent Role="GigGenre">
+              <PropertyRef Name="GigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Host_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Host" Type="Self.Host" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Host">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Listener_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Listener" Type="Self.Listener" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Listener">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ListenerArtist_dbo_Artist_Id">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListenerArtist" Type="Self.ListenerArtist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListenerArtist">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ListenerArtist_dbo_Listener_Id">
+          <End Role="Listener" Type="Self.Listener" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListenerArtist" Type="Self.ListenerArtist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Listener">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListenerArtist">
+              <PropertyRef Name="ListenerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ListenerGenre_dbo_Genre_GenreID">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListenerGenre" Type="Self.ListenerGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="ListenerGenre">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ListenerGenre_dbo_Listener_Id">
+          <End Role="Listener" Type="Self.Listener" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListenerGenre" Type="Self.ListenerGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Listener">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListenerGenre">
+              <PropertyRef Name="ListenerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Member_dbo_Artist_Id">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Member_dbo_Instrument_InstrumentID">
+          <End Role="Instrument" Type="Self.Instrument" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrument">
+              <PropertyRef Name="InstrumentID" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="InstrumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CloudConcertsDataModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Artist" EntityType="Self.Artist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArtistConcert" EntityType="Self.ArtistConcert" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArtistGig" EntityType="Self.ArtistGig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Concert" EntityType="Self.Concert" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gig" EntityType="Self.Gig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GigGenre" EntityType="Self.GigGenre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Host" EntityType="Self.Host" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instrument" EntityType="Self.Instrument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Listener" EntityType="Self.Listener" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListenerArtist" EntityType="Self.ListenerArtist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListenerGenre" EntityType="Self.ListenerGenre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Artist_dbo_AspNetUsers_Id" Association="Self.FK_dbo_Artist_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Artist" EntitySet="Artist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Artist_dbo_Genre_GenreID" Association="Self.FK_dbo_Artist_dbo_Genre_GenreID">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Artist" EntitySet="Artist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ArtistConcert_dbo_Artist_Id" Association="Self.FK_dbo_ArtistConcert_dbo_Artist_Id">
+            <End Role="Artist" EntitySet="Artist" />
+            <End Role="ArtistConcert" EntitySet="ArtistConcert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ArtistConcert_dbo_Concert_ConcertID" Association="Self.FK_dbo_ArtistConcert_dbo_Concert_ConcertID">
+            <End Role="Concert" EntitySet="Concert" />
+            <End Role="ArtistConcert" EntitySet="ArtistConcert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ArtistGig_dbo_Artist_Id" Association="Self.FK_dbo_ArtistGig_dbo_Artist_Id">
+            <End Role="Artist" EntitySet="Artist" />
+            <End Role="ArtistGig" EntitySet="ArtistGig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ArtistGig_dbo_Gig_GigID" Association="Self.FK_dbo_ArtistGig_dbo_Gig_GigID">
+            <End Role="Gig" EntitySet="Gig" />
+            <End Role="ArtistGig" EntitySet="ArtistGig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Concert_dbo_Host_Id" Association="Self.FK_dbo_Concert_dbo_Host_Id">
+            <End Role="Host" EntitySet="Host" />
+            <End Role="Concert" EntitySet="Concert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Gig_dbo_Host_Id" Association="Self.FK_dbo_Gig_dbo_Host_Id">
+            <End Role="Host" EntitySet="Host" />
+            <End Role="Gig" EntitySet="Gig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GigGenre_dbo_Genre_GenreID" Association="Self.FK_dbo_GigGenre_dbo_Genre_GenreID">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="GigGenre" EntitySet="GigGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GigGenre_dbo_Gig_GigID" Association="Self.FK_dbo_GigGenre_dbo_Gig_GigID">
+            <End Role="Gig" EntitySet="Gig" />
+            <End Role="GigGenre" EntitySet="GigGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Host_dbo_AspNetUsers_Id" Association="Self.FK_dbo_Host_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Host" EntitySet="Host" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Listener_dbo_AspNetUsers_Id" Association="Self.FK_dbo_Listener_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Listener" EntitySet="Listener" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ListenerArtist_dbo_Artist_Id" Association="Self.FK_dbo_ListenerArtist_dbo_Artist_Id">
+            <End Role="Artist" EntitySet="Artist" />
+            <End Role="ListenerArtist" EntitySet="ListenerArtist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ListenerArtist_dbo_Listener_Id" Association="Self.FK_dbo_ListenerArtist_dbo_Listener_Id">
+            <End Role="Listener" EntitySet="Listener" />
+            <End Role="ListenerArtist" EntitySet="ListenerArtist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ListenerGenre_dbo_Genre_GenreID" Association="Self.FK_dbo_ListenerGenre_dbo_Genre_GenreID">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="ListenerGenre" EntitySet="ListenerGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ListenerGenre_dbo_Listener_Id" Association="Self.FK_dbo_ListenerGenre_dbo_Listener_Id">
+            <End Role="Listener" EntitySet="Listener" />
+            <End Role="ListenerGenre" EntitySet="ListenerGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Member_dbo_Artist_Id" Association="Self.FK_dbo_Member_dbo_Artist_Id">
+            <End Role="Artist" EntitySet="Artist" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Member_dbo_Instrument_InstrumentID" Association="Self.FK_dbo_Member_dbo_Instrument_InstrumentID">
+            <End Role="Instrument" EntitySet="Instrument" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CloudConcertsDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GenreID" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Artist_dbo_AspNetUsers_Id" FromRole="Artist" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK_dbo_Artist_dbo_Genre_GenreID" FromRole="Artist" ToRole="Genre" />
+          <NavigationProperty Name="ArtistConcerts" Relationship="Self.FK_dbo_ArtistConcert_dbo_Artist_Id" FromRole="Artist" ToRole="ArtistConcert" />
+          <NavigationProperty Name="ArtistGigs" Relationship="Self.FK_dbo_ArtistGig_dbo_Artist_Id" FromRole="Artist" ToRole="ArtistGig" />
+          <NavigationProperty Name="ListenerArtists" Relationship="Self.FK_dbo_ListenerArtist_dbo_Artist_Id" FromRole="Artist" ToRole="ListenerArtist" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_dbo_Member_dbo_Artist_Id" FromRole="Artist" ToRole="Member" />
+          <Property Name="ImageURL" Type="String" MaxLength="180" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ArtistConcert">
+          <Key>
+            <PropertyRef Name="ArtistConcertID" />
+          </Key>
+          <Property Name="ArtistConcertID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArtistID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ConcertID" Type="Int32" />
+          <NavigationProperty Name="Artist" Relationship="Self.FK_dbo_ArtistConcert_dbo_Artist_Id" FromRole="ArtistConcert" ToRole="Artist" />
+          <NavigationProperty Name="Concert" Relationship="Self.FK_dbo_ArtistConcert_dbo_Concert_ConcertID" FromRole="ArtistConcert" ToRole="Concert" />
+        </EntityType>
+        <EntityType Name="ArtistGig">
+          <Key>
+            <PropertyRef Name="ArtistGigID" />
+          </Key>
+          <Property Name="ArtistGigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArtistID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GigID" Type="Int32" />
+          <NavigationProperty Name="Artist" Relationship="Self.FK_dbo_ArtistGig_dbo_Artist_Id" FromRole="ArtistGig" ToRole="Artist" />
+          <NavigationProperty Name="Gig" Relationship="Self.FK_dbo_ArtistGig_dbo_Gig_GigID" FromRole="ArtistGig" ToRole="Gig" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Artist" Relationship="Self.FK_dbo_Artist_dbo_AspNetUsers_Id" FromRole="AspNetUsers" ToRole="Artist" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Host" Relationship="Self.FK_dbo_Host_dbo_AspNetUsers_Id" FromRole="AspNetUsers" ToRole="Host" />
+          <NavigationProperty Name="Listener" Relationship="Self.FK_dbo_Listener_dbo_AspNetUsers_Id" FromRole="AspNetUsers" ToRole="Listener" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Concert">
+          <Key>
+            <PropertyRef Name="ConcertID" />
+          </Key>
+          <Property Name="ConcertID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HostID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TicketPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="isPublic" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ArtistConcerts" Relationship="Self.FK_dbo_ArtistConcert_dbo_Concert_ConcertID" FromRole="Concert" ToRole="ArtistConcert" />
+          <NavigationProperty Name="Host" Relationship="Self.FK_dbo_Concert_dbo_Host_Id" FromRole="Concert" ToRole="Host" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Artists" Relationship="Self.FK_dbo_Artist_dbo_Genre_GenreID" FromRole="Genre" ToRole="Artist" />
+          <NavigationProperty Name="GigGenres" Relationship="Self.FK_dbo_GigGenre_dbo_Genre_GenreID" FromRole="Genre" ToRole="GigGenre" />
+          <NavigationProperty Name="ListenerGenres" Relationship="Self.FK_dbo_ListenerGenre_dbo_Genre_GenreID" FromRole="Genre" ToRole="ListenerGenre" />
+        </EntityType>
+        <EntityType Name="Gig">
+          <Key>
+            <PropertyRef Name="GigID" />
+          </Key>
+          <Property Name="GigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HostID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Compensation" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="isPublic" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ArtistGigs" Relationship="Self.FK_dbo_ArtistGig_dbo_Gig_GigID" FromRole="Gig" ToRole="ArtistGig" />
+          <NavigationProperty Name="Host" Relationship="Self.FK_dbo_Gig_dbo_Host_Id" FromRole="Gig" ToRole="Host" />
+          <NavigationProperty Name="GigGenres" Relationship="Self.FK_dbo_GigGenre_dbo_Gig_GigID" FromRole="Gig" ToRole="GigGenre" />
+        </EntityType>
+        <EntityType Name="GigGenre">
+          <Key>
+            <PropertyRef Name="GigGenreID" />
+          </Key>
+          <Property Name="GigGenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GigID" Type="Int32" />
+          <Property Name="GenreID" Type="Int32" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK_dbo_GigGenre_dbo_Genre_GenreID" FromRole="GigGenre" ToRole="Genre" />
+          <NavigationProperty Name="Gig" Relationship="Self.FK_dbo_GigGenre_dbo_Gig_GigID" FromRole="GigGenre" ToRole="Gig" />
+        </EntityType>
+        <EntityType Name="Host">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VenueName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Host_dbo_AspNetUsers_Id" FromRole="Host" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Concerts" Relationship="Self.FK_dbo_Concert_dbo_Host_Id" FromRole="Host" ToRole="Concert" />
+          <NavigationProperty Name="Gigs" Relationship="Self.FK_dbo_Gig_dbo_Host_Id" FromRole="Host" ToRole="Gig" />
+          <Property Name="ImageURL" Type="String" MaxLength="180" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Instrument">
+          <Key>
+            <PropertyRef Name="InstrumentID" />
+          </Key>
+          <Property Name="InstrumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Members" Relationship="Self.FK_dbo_Member_dbo_Instrument_InstrumentID" FromRole="Instrument" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Listener">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Listener_dbo_AspNetUsers_Id" FromRole="Listener" ToRole="AspNetUsers" />
+          <NavigationProperty Name="ListenerArtists" Relationship="Self.FK_dbo_ListenerArtist_dbo_Listener_Id" FromRole="Listener" ToRole="ListenerArtist" />
+          <NavigationProperty Name="ListenerGenres" Relationship="Self.FK_dbo_ListenerGenre_dbo_Listener_Id" FromRole="Listener" ToRole="ListenerGenre" />
+          <Property Name="ImageURL" Type="String" MaxLength="180" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListenerArtist">
+          <Key>
+            <PropertyRef Name="ListenerArtistID" />
+          </Key>
+          <Property Name="ListenerArtistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ListenerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ArtistID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Artist" Relationship="Self.FK_dbo_ListenerArtist_dbo_Artist_Id" FromRole="ListenerArtist" ToRole="Artist" />
+          <NavigationProperty Name="Listener" Relationship="Self.FK_dbo_ListenerArtist_dbo_Listener_Id" FromRole="ListenerArtist" ToRole="Listener" />
+        </EntityType>
+        <EntityType Name="ListenerGenre">
+          <Key>
+            <PropertyRef Name="ListenerGenreID" />
+          </Key>
+          <Property Name="ListenerGenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ListenerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GenreID" Type="Int32" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK_dbo_ListenerGenre_dbo_Genre_GenreID" FromRole="ListenerGenre" ToRole="Genre" />
+          <NavigationProperty Name="Listener" Relationship="Self.FK_dbo_ListenerGenre_dbo_Listener_Id" FromRole="ListenerGenre" ToRole="Listener" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InstrumentID" Type="Int32" />
+          <Property Name="ArtistID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Artist" Relationship="Self.FK_dbo_Member_dbo_Artist_Id" FromRole="Member" ToRole="Artist" />
+          <NavigationProperty Name="Instrument" Relationship="Self.FK_dbo_Member_dbo_Instrument_InstrumentID" FromRole="Member" ToRole="Instrument" />
+        </EntityType>
+        <Association Name="FK_dbo_Artist_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Artist">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Artist_dbo_Genre_GenreID">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Artist" Type="Self.Artist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Artist">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ArtistConcert_dbo_Artist_Id">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArtistConcert" Type="Self.ArtistConcert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArtistConcert">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ArtistGig_dbo_Artist_Id">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArtistGig" Type="Self.ArtistGig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArtistGig">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ListenerArtist_dbo_Artist_Id">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListenerArtist" Type="Self.ListenerArtist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListenerArtist">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Member_dbo_Artist_Id">
+          <End Role="Artist" Type="Self.Artist" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ArtistConcert_dbo_Concert_ConcertID">
+          <End Role="Concert" Type="Self.Concert" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArtistConcert" Type="Self.ArtistConcert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Concert">
+              <PropertyRef Name="ConcertID" />
+            </Principal>
+            <Dependent Role="ArtistConcert">
+              <PropertyRef Name="ConcertID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ArtistGig_dbo_Gig_GigID">
+          <End Role="Gig" Type="Self.Gig" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ArtistGig" Type="Self.ArtistGig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gig">
+              <PropertyRef Name="GigID" />
+            </Principal>
+            <Dependent Role="ArtistGig">
+              <PropertyRef Name="GigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Host_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Host" Type="Self.Host" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Host">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Listener_dbo_AspNetUsers_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="Listener" Type="Self.Listener" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Listener">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Concert_dbo_Host_Id">
+          <End Role="Host" Type="Self.Host" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Concert" Type="Self.Concert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Concert">
+              <PropertyRef Name="HostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GigGenre_dbo_Genre_GenreID">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GigGenre" Type="Self.GigGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="GigGenre">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ListenerGenre_dbo_Genre_GenreID">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListenerGenre" Type="Self.ListenerGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="ListenerGenre">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Gig_dbo_Host_Id">
+          <End Role="Host" Type="Self.Host" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Gig" Type="Self.Gig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Host">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Gig">
+              <PropertyRef Name="HostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_GigGenre_dbo_Gig_GigID">
+          <End Role="Gig" Type="Self.Gig" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GigGenre" Type="Self.GigGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gig">
+              <PropertyRef Name="GigID" />
+            </Principal>
+            <Dependent Role="GigGenre">
+              <PropertyRef Name="GigID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Member_dbo_Instrument_InstrumentID">
+          <End Role="Instrument" Type="Self.Instrument" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrument">
+              <PropertyRef Name="InstrumentID" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="InstrumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ListenerArtist_dbo_Listener_Id">
+          <End Role="Listener" Type="Self.Listener" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListenerArtist" Type="Self.ListenerArtist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Listener">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListenerArtist">
+              <PropertyRef Name="ListenerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ListenerGenre_dbo_Listener_Id">
+          <End Role="Listener" Type="Self.Listener" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ListenerGenre" Type="Self.ListenerGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Listener">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListenerGenre">
+              <PropertyRef Name="ListenerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CloudConcertsDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Artists" EntityType="Self.Artist" />
+          <EntitySet Name="ArtistConcerts" EntityType="Self.ArtistConcert" />
+          <EntitySet Name="ArtistGigs" EntityType="Self.ArtistGig" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Concerts" EntityType="Self.Concert" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Gigs" EntityType="Self.Gig" />
+          <EntitySet Name="GigGenres" EntityType="Self.GigGenre" />
+          <EntitySet Name="Hosts" EntityType="Self.Host" />
+          <EntitySet Name="Instruments" EntityType="Self.Instrument" />
+          <EntitySet Name="Listeners" EntityType="Self.Listener" />
+          <EntitySet Name="ListenerArtists" EntityType="Self.ListenerArtist" />
+          <EntitySet Name="ListenerGenres" EntityType="Self.ListenerGenre" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <AssociationSet Name="FK_dbo_Artist_dbo_AspNetUsers_Id" Association="Self.FK_dbo_Artist_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Artist" EntitySet="Artists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Artist_dbo_Genre_GenreID" Association="Self.FK_dbo_Artist_dbo_Genre_GenreID">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Artist" EntitySet="Artists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ArtistConcert_dbo_Artist_Id" Association="Self.FK_dbo_ArtistConcert_dbo_Artist_Id">
+            <End Role="Artist" EntitySet="Artists" />
+            <End Role="ArtistConcert" EntitySet="ArtistConcerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ArtistGig_dbo_Artist_Id" Association="Self.FK_dbo_ArtistGig_dbo_Artist_Id">
+            <End Role="Artist" EntitySet="Artists" />
+            <End Role="ArtistGig" EntitySet="ArtistGigs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ListenerArtist_dbo_Artist_Id" Association="Self.FK_dbo_ListenerArtist_dbo_Artist_Id">
+            <End Role="Artist" EntitySet="Artists" />
+            <End Role="ListenerArtist" EntitySet="ListenerArtists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Member_dbo_Artist_Id" Association="Self.FK_dbo_Member_dbo_Artist_Id">
+            <End Role="Artist" EntitySet="Artists" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ArtistConcert_dbo_Concert_ConcertID" Association="Self.FK_dbo_ArtistConcert_dbo_Concert_ConcertID">
+            <End Role="Concert" EntitySet="Concerts" />
+            <End Role="ArtistConcert" EntitySet="ArtistConcerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ArtistGig_dbo_Gig_GigID" Association="Self.FK_dbo_ArtistGig_dbo_Gig_GigID">
+            <End Role="Gig" EntitySet="Gigs" />
+            <End Role="ArtistGig" EntitySet="ArtistGigs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Host_dbo_AspNetUsers_Id" Association="Self.FK_dbo_Host_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Host" EntitySet="Hosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Listener_dbo_AspNetUsers_Id" Association="Self.FK_dbo_Listener_dbo_AspNetUsers_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Listener" EntitySet="Listeners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Concert_dbo_Host_Id" Association="Self.FK_dbo_Concert_dbo_Host_Id">
+            <End Role="Host" EntitySet="Hosts" />
+            <End Role="Concert" EntitySet="Concerts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GigGenre_dbo_Genre_GenreID" Association="Self.FK_dbo_GigGenre_dbo_Genre_GenreID">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="GigGenre" EntitySet="GigGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ListenerGenre_dbo_Genre_GenreID" Association="Self.FK_dbo_ListenerGenre_dbo_Genre_GenreID">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="ListenerGenre" EntitySet="ListenerGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Gig_dbo_Host_Id" Association="Self.FK_dbo_Gig_dbo_Host_Id">
+            <End Role="Host" EntitySet="Hosts" />
+            <End Role="Gig" EntitySet="Gigs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_GigGenre_dbo_Gig_GigID" Association="Self.FK_dbo_GigGenre_dbo_Gig_GigID">
+            <End Role="Gig" EntitySet="Gigs" />
+            <End Role="GigGenre" EntitySet="GigGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Member_dbo_Instrument_InstrumentID" Association="Self.FK_dbo_Member_dbo_Instrument_InstrumentID">
+            <End Role="Instrument" EntitySet="Instruments" />
+            <End Role="Member" EntitySet="Members" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ListenerArtist_dbo_Listener_Id" Association="Self.FK_dbo_ListenerArtist_dbo_Listener_Id">
+            <End Role="Listener" EntitySet="Listeners" />
+            <End Role="ListenerArtist" EntitySet="ListenerArtists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ListenerGenre_dbo_Listener_Id" Association="Self.FK_dbo_ListenerGenre_dbo_Listener_Id">
+            <End Role="Listener" EntitySet="Listeners" />
+            <End Role="ListenerGenre" EntitySet="ListenerGenres" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CloudConcertsDataModelStoreContainer" CdmEntityContainer="CloudConcertsDataEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.Artist">
+              <MappingFragment StoreEntitySet="Artist">
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StageName" ColumnName="StageName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArtistConcerts">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.ArtistConcert">
+              <MappingFragment StoreEntitySet="ArtistConcert">
+                <ScalarProperty Name="ArtistConcertID" ColumnName="ArtistConcertID" />
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+                <ScalarProperty Name="ConcertID" ColumnName="ConcertID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArtistGigs">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.ArtistGig">
+              <MappingFragment StoreEntitySet="ArtistGig">
+                <ScalarProperty Name="ArtistGigID" ColumnName="ArtistGigID" />
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+                <ScalarProperty Name="GigID" ColumnName="GigID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Concerts">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.Concert">
+              <MappingFragment StoreEntitySet="Concert">
+                <ScalarProperty Name="ConcertID" ColumnName="ConcertID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="HostID" ColumnName="HostID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="TicketPrice" ColumnName="TicketPrice" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gigs">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.Gig">
+              <MappingFragment StoreEntitySet="Gig">
+                <ScalarProperty Name="GigID" ColumnName="GigID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="HostID" ColumnName="HostID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Compensation" ColumnName="Compensation" />
+                <ScalarProperty Name="isPublic" ColumnName="isPublic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GigGenres">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.GigGenre">
+              <MappingFragment StoreEntitySet="GigGenre">
+                <ScalarProperty Name="GigGenreID" ColumnName="GigGenreID" />
+                <ScalarProperty Name="GigID" ColumnName="GigID" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hosts">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.Host">
+              <MappingFragment StoreEntitySet="Host">
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VenueName" ColumnName="VenueName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instruments">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.Instrument">
+              <MappingFragment StoreEntitySet="Instrument">
+                <ScalarProperty Name="InstrumentID" ColumnName="InstrumentID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Listeners">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.Listener">
+              <MappingFragment StoreEntitySet="Listener">
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListenerArtists">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.ListenerArtist">
+              <MappingFragment StoreEntitySet="ListenerArtist">
+                <ScalarProperty Name="ListenerArtistID" ColumnName="ListenerArtistID" />
+                <ScalarProperty Name="ListenerID" ColumnName="ListenerID" />
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListenerGenres">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.ListenerGenre">
+              <MappingFragment StoreEntitySet="ListenerGenre">
+                <ScalarProperty Name="ListenerGenreID" ColumnName="ListenerGenreID" />
+                <ScalarProperty Name="ListenerID" ColumnName="ListenerID" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="CloudConcertsDataModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="InstrumentID" ColumnName="InstrumentID" />
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="CloudConcertsDataModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

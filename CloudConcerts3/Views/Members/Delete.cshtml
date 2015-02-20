@@ -28,11 +28,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Instrument)
+            @Html.DisplayNameFor(model => model.Artist.StageName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Instrument)
+            @Html.DisplayFor(model => model.Artist.StageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Instrument.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Instrument.Name)
         </dd>
 
     </dl>

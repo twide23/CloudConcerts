@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/jquery-frontier-cal-1.3.2.css")
     @Styles.Render("~/Content/jquery-ui-1.8.1.custom.css")
     @Scripts.Render("~/bundles/modernizr")
+    <meta name="description" content="Cloud Concerts. Connecting artists, venues, concerts, listeners, and music enthusiasts. Find concerts in your area." />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -37,6 +38,13 @@
                                 <li>@Html.ActionLink("Concerts", "Index", "Concerts")</li>
                                 <li>@Html.ActionLink("Gigs", "Index", "Gigs")</li>
                                 <li>@Html.ActionLink("Listeners", "Index", "Listeners")</li>
+                                <li>@Html.ActionLink("Instruments", "Index", "Instruments")</li>
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("ArtistConcerts", "Index", "ArtistConcerts")</li>
+                                <li>@Html.ActionLink("ArtistGigs", "Index", "ArtistGigs")</li>
+                                <li>@Html.ActionLink("ListenerGenres", "Index", "ListenerGenres")</li>
+                                <li>@Html.ActionLink("ListenerArtists", "Index", "ListenerArtists")</li>
+                                <li>@Html.ActionLink("GigGenres", "Index", "GigGenres")</li>
                             </ul>
                         </li>
                     }
@@ -46,6 +54,11 @@
                             <li>@Html.ActionLink("Artists", "Artists", "Browse")</li>
                             <li>@Html.ActionLink("Hosts", "Hosts", "Browse")</li>
                             <li>@Html.ActionLink("Concerts", "Concerts", "Browse")</li>
+                            @if (ViewContext.HttpContext.User.IsInRole("admin") ||
+                                 ViewContext.HttpContext.User.IsInRole("artist"))
+                            {
+                                <li>@Html.ActionLink("Gigs", "Apply", "Gigs")</li>
+                            }
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Calendar", "Calendar", "Browse")</li>

@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -159,36 +161,102 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ArtistsController.cs" />
-    <Compile Include="Controllers\BrowseController.cs" />
-    <Compile Include="Controllers\ConcertsController.cs" />
-    <Compile Include="Controllers\GenresController.cs" />
-    <Compile Include="Controllers\GigsController.cs" />
+    <Compile Include="Controllers\BrowseController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\EntityControllers\Relationships\ArtistConcertsController.cs" />
+    <Compile Include="Controllers\EntityControllers\ArtistsController.cs" />
+    <Compile Include="Controllers\EntityControllers\ConcertsController.cs" />
+    <Compile Include="Controllers\EntityControllers\GenresController.cs" />
+    <Compile Include="Controllers\EntityControllers\GigsController.cs" />
+    <Compile Include="Controllers\EntityControllers\HostsController.cs" />
+    <Compile Include="Controllers\EntityControllers\InstrumentsController.cs" />
+    <Compile Include="Controllers\EntityControllers\ListenersController.cs" />
+    <Compile Include="Controllers\EntityControllers\MembersController.cs" />
+    <Compile Include="Controllers\EntityControllers\Relationships\ArtistGigsController.cs" />
+    <Compile Include="Controllers\EntityControllers\Relationships\GigGenresController.cs" />
+    <Compile Include="Controllers\EntityControllers\Relationships\ListenerArtistsController.cs" />
+    <Compile Include="Controllers\EntityControllers\Relationships\ListenerGenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HostsController.cs" />
-    <Compile Include="Controllers\ListenersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MembersController.cs" />
-    <Compile Include="DAL\MusicContext3.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DAL\MusicInitializer.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Artist.cs" />
-    <Compile Include="Models\Concert.cs" />
-    <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\Gig.cs" />
-    <Compile Include="Models\Host.cs" />
+    <Compile Include="Models\Artist.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArtistConcert.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArtistGig.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CloudConcertsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CloudConcertsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CloudConcertsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CloudConcertsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CloudConcertsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Concert.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConcertViewModel.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Genre.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gig.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GigGenre.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GigViewModel.cs" />
+    <Compile Include="Models\Host.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Listener.cs" />
+    <Compile Include="Models\Instrument.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Listener.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListenerArtist.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListenerGenre.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\Member.cs">
+      <DependentUpon>CloudConcertsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -197,6 +265,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jquery-frontier-cal-1.3.2.css" />
     <Content Include="Content\jquery-ui-1.8.1.custom.css" />
+    <Content Include="Resources\cloud_icon.png" />
     <Content Include="Scripts\calendarscript.js" />
     <Content Include="Scripts\jquery-1.4.2-ie-fix.min.js" />
     <Content Include="Scripts\jquery-frontier-cal-1.3.2.min.js" />
@@ -211,6 +280,24 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\CloudConcertsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CloudConcertsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CloudConcertsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CloudConcertsModel.edmx</DependentUpon>
+      <LastGenOutput>CloudConcertsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CloudConcertsModel.edmx.diagram">
+      <DependentUpon>CloudConcertsModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\CloudConcertsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CloudConcertsModel.edmx</DependentUpon>
+      <LastGenOutput>CloudConcertsModel.cs</LastGenOutput>
+    </Content>
+    <None Include="Properties\PublishProfiles\cloudconcerts.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -305,15 +392,50 @@
     <Content Include="Views\Gigs\Details.cshtml" />
     <Content Include="Views\Gigs\Edit.cshtml" />
     <Content Include="Views\Gigs\Index.cshtml" />
+    <Content Include="Views\Gigs\Apply.cshtml" />
+    <Content Include="Views\Artists\Create.cshtml" />
+    <Content Include="Views\Hosts\Create.cshtml" />
+    <Content Include="Views\Listeners\Create.cshtml" />
+    <Content Include="Views\Instruments\Create.cshtml" />
+    <Content Include="Views\Instruments\Delete.cshtml" />
+    <Content Include="Views\Instruments\Details.cshtml" />
+    <Content Include="Views\Instruments\Edit.cshtml" />
+    <Content Include="Views\Instruments\Index.cshtml" />
+    <Content Include="Views\ArtistConcerts\Create.cshtml" />
+    <Content Include="Views\ArtistConcerts\Delete.cshtml" />
+    <Content Include="Views\ArtistConcerts\Details.cshtml" />
+    <Content Include="Views\ArtistConcerts\Edit.cshtml" />
+    <Content Include="Views\ArtistConcerts\Index.cshtml" />
+    <Content Include="Views\ArtistGigs\Create.cshtml" />
+    <Content Include="Views\ArtistGigs\Delete.cshtml" />
+    <Content Include="Views\ArtistGigs\Details.cshtml" />
+    <Content Include="Views\ArtistGigs\Edit.cshtml" />
+    <Content Include="Views\ArtistGigs\Index.cshtml" />
+    <Content Include="Views\ListenerGenres\Create.cshtml" />
+    <Content Include="Views\ListenerGenres\Delete.cshtml" />
+    <Content Include="Views\ListenerGenres\Details.cshtml" />
+    <Content Include="Views\ListenerGenres\Edit.cshtml" />
+    <Content Include="Views\ListenerGenres\Index.cshtml" />
+    <Content Include="Views\ListenerArtists\Create.cshtml" />
+    <Content Include="Views\ListenerArtists\Delete.cshtml" />
+    <Content Include="Views\ListenerArtists\Details.cshtml" />
+    <Content Include="Views\ListenerArtists\Edit.cshtml" />
+    <Content Include="Views\ListenerArtists\Index.cshtml" />
+    <Content Include="Views\GigGenres\Create.cshtml" />
+    <Content Include="Views\GigGenres\Delete.cshtml" />
+    <Content Include="Views\GigGenres\Details.cshtml" />
+    <Content Include="Views\GigGenres\Edit.cshtml" />
+    <Content Include="Views\GigGenres\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
