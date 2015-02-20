@@ -17,6 +17,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
             @Html.ActionLink("Stage Name", "Artists", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
@@ -29,6 +32,12 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @if (item.ImageURL != null)
+            {
+                <img src="@item.ImageURL" title="@item.ImageURL" />
+            }
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.StageName)
         </td>

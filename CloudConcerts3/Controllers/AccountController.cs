@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -10,8 +7,13 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CloudConcerts3.Models;
 using System.Collections.Generic;
-//using CloudConcerts3.DAL;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.IO;
+using System.Configuration;
+using Microsoft.WindowsAzure;
+using System;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace CloudConcerts3.Controllers
 {
@@ -156,7 +158,7 @@ namespace CloudConcerts3.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase imagefile)
         {
             if (ModelState.IsValid)
             {
@@ -169,6 +171,24 @@ namespace CloudConcerts3.Controllers
 
                 if (result.Succeeded)
                 {
+                    string imageName = String.Format("task-photo-{0}{1}",
+                        Guid.NewGuid().ToString(),
+                        Path.GetExtension(imagefile.FileName));
+                    // Upload the file to Azure Blob Storage
+                    string imageBlobURL =
+                    await Task.Run(
+                        () =>
+                        {
+                            CloudStorageAccount storageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=cloudconcerts;AccountKey=fi05r3Bzd6PJvAiJGXZxcnVr28F+U4j4em5LaLl9vX5aWUQqBzl0K/wWmL3Zeqt4ZRkQ0FWCfogaBybdsNQJFA==");
+                            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+                            CloudBlobContainer container = blobClient.GetContainerReference("images");
+                            CloudBlockBlob blockBlob = container.GetBlockBlobReference(imageName);
+                            blockBlob.Properties.ContentType = imagefile.ContentType;
+                            blockBlob.UploadFromStream(imagefile.InputStream);
+                            var uriBuilder = new UriBuilder(blockBlob.Uri);
+                            return uriBuilder.ToString();
+                        });
+
                     if (userType == "Artist")
                     {
                         var art = new Artist()
@@ -177,7 +197,7 @@ namespace CloudConcerts3.Controllers
                             StageName = model.ArtistStageName,
                             Description = model.ArtistDescription,
                             GenreID = model.ArtistGenreID,
-                            ImageURL = model.ImageURL
+                            ImageURL = imageBlobURL
                         };
                         db.Artists.Add(art);
                         db.SaveChanges();
@@ -200,7 +220,7 @@ namespace CloudConcerts3.Controllers
                             Address = model.HostAddress,
                             Phone = model.HostPhone,
                             Website = model.HostWebsite,
-                            ImageURL = model.ImageURL
+                            ImageURL = imageBlobURL
                         };
                         db.Hosts.Add(host);
                         db.SaveChanges();
@@ -222,7 +242,7 @@ namespace CloudConcerts3.Controllers
                             LastName = model.ListenerLastName,
                             City = model.ListenerCity,
                             State = model.ListenerState,
-                            ImageURL = model.ImageURL
+                            ImageURL = imageBlobURL
                         };
                         db.Listeners.Add(listener);
                         db.SaveChanges();
