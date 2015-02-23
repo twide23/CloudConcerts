@@ -6,9 +6,9 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -31,7 +31,7 @@
         <td>
             @if (item.ImageURL != null)
             {
-                <img src="@item.ImageURL" title="@item.ImageURL" />
+                <img src="@item.ImageURL" title="@item.ImageURL" class="browse_profile_picture" />
             }
         </td>
         <td>

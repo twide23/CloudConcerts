@@ -6,11 +6,14 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -28,6 +31,12 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @if (item.ImageURL != null)
+            {
+                <img src="@item.ImageURL" title="@item.ImageURL" class="browse_profile_picture" />
+            }
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>

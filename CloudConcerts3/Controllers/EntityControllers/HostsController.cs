@@ -46,7 +46,7 @@ namespace CloudConcerts3.Controllers.EntityControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,VenueName,Description,Address,Phone,Website,ImageURL")] Host host)
+        public ActionResult Create([Bind(Include = "Id,VenueName,Description,Address,Phone,Website")] Host host)
         {
             if (ModelState.IsValid)
             {
@@ -78,11 +78,15 @@ namespace CloudConcerts3.Controllers.EntityControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VenueName,Description,Address,Phone,Website,ImageURL")] Host host)
+        public ActionResult Edit([Bind(Include = "Id,VenueName,Description,Address,Phone,Website,ImageURL")] Host host, HttpPostedFileBase imagefile)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(host).State = EntityState.Modified;
+                if (imagefile != null)
+                {
+                    host.ImageURL = CloudConcerts3.Models.ImageStorage.UploadBlob(host.ImageURL, imagefile);
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -115,6 +119,24 @@ namespace CloudConcerts3.Controllers.EntityControllers
             db.AspNetUsers.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteImage(string userid)
+        {
+            if (userid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Host host = db.Hosts.Find(userid);
+            if (host == null)
+            {
+                return HttpNotFound();
+            }
+            CloudConcerts3.Models.ImageStorage.DeleteBlob(host.ImageURL);
+            host.ImageURL = null;
+            db.SaveChanges();
+            return RedirectToAction("Edit", new { id = userid });
         }
 
         protected override void Dispose(bool disposing)

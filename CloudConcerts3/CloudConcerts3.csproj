@@ -262,6 +262,7 @@
       <DependentUpon>CloudConcertsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImageStorage.cs" />
     <Compile Include="Models\Instrument.cs">
       <DependentUpon>CloudConcertsModel.tt</DependentUpon>
     </Compile>
@@ -415,9 +416,6 @@
     <Content Include="Views\Gigs\Edit.cshtml" />
     <Content Include="Views\Gigs\Index.cshtml" />
     <Content Include="Views\Gigs\Apply.cshtml" />
-    <Content Include="Views\Artists\Create.cshtml" />
-    <Content Include="Views\Hosts\Create.cshtml" />
-    <Content Include="Views\Listeners\Create.cshtml" />
     <Content Include="Views\Instruments\Create.cshtml" />
     <Content Include="Views\Instruments\Delete.cshtml" />
     <Content Include="Views\Instruments\Details.cshtml" />

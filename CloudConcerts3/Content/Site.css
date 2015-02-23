@@ -23,3 +23,7 @@ textarea {
     max-width: 280px;
 }
 
+.browse_profile_picture {
+    width: 150px;
+    max-height: 200px;
+}

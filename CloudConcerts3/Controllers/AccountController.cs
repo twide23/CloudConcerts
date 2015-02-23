@@ -171,23 +171,12 @@ namespace CloudConcerts3.Controllers
 
                 if (result.Succeeded)
                 {
-                    string imageName = String.Format("task-photo-{0}{1}",
-                        Guid.NewGuid().ToString(),
-                        Path.GetExtension(imagefile.FileName));
-                    // Upload the file to Azure Blob Storage
-                    string imageBlobURL =
-                    await Task.Run(
-                        () =>
-                        {
-                            CloudStorageAccount storageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=cloudconcerts;AccountKey=fi05r3Bzd6PJvAiJGXZxcnVr28F+U4j4em5LaLl9vX5aWUQqBzl0K/wWmL3Zeqt4ZRkQ0FWCfogaBybdsNQJFA==");
-                            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-                            CloudBlobContainer container = blobClient.GetContainerReference("images");
-                            CloudBlockBlob blockBlob = container.GetBlockBlobReference(imageName);
-                            blockBlob.Properties.ContentType = imagefile.ContentType;
-                            blockBlob.UploadFromStream(imagefile.InputStream);
-                            var uriBuilder = new UriBuilder(blockBlob.Uri);
-                            return uriBuilder.ToString();
-                        });
+                    //Upload image to azure cloud and get the blob url
+                    string imageBlobURL = null;
+                    if (imagefile != null)
+                    {
+                        imageBlobURL = CloudConcerts3.Models.ImageStorage.UploadBlob(null, imagefile);
+                    }
 
                     if (userType == "Artist")
                     {

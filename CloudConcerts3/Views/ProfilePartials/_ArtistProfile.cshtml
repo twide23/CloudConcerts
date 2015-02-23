@@ -37,12 +37,15 @@
         @Html.DisplayFor(model => model.Description)
     </dd>
 
-    @*<dt>
-        @Html.DisplayNameFor(model => model.Email)
+    <dt>
+        @Html.DisplayNameFor(model => model.ImageURL)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.Email)
-    </dd>*@
+        @if (Model.ImageURL != null)
+        {
+            <img src="@Model.ImageURL" title="@Model.ImageURL" class="browse_profile_picture" />
+        }
+    </dd>
 
 </dl>

@@ -56,4 +56,15 @@
         @Html.DisplayFor(model => model.Website)
     </dd>
 
+    <dt>
+        @Html.DisplayNameFor(model => model.ImageURL)
+    </dt>
+
+    <dd>
+        @if (Model.ImageURL != null)
+        {
+            <img src="@Model.ImageURL" title="@Model.ImageURL" class="browse_profile_picture" />
+        }
+    </dd>
+
 </dl>

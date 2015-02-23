@@ -29,3 +29,24 @@ function chooseListener() {
     document.getElementById("artist_register").style.display = "none";
     $("#user_music_type").val("Listener");
 }
+
+function deleteArtistImage(id) {
+    var url = "/Artists/DeleteImage";
+    $.post(url, { userid: id }, function (data) {
+        window.location.href = "/Artists/Edit/" + id;
+    });
+}
+
+function deleteHostImage(id) {
+    var url = "/Hosts/DeleteImage";
+    $.post(url, { userid: id }, function (data) {
+        window.location.href = "/Hosts/Edit/" + id;
+    });
+}
+
+function deleteListenerImage(id) {
+    var url = "/Listeners/DeleteImage";
+    $.post(url, { userid: id }, function (data) {
+        window.location.href = "/Listeners/Edit/" + id;
+    });
+}

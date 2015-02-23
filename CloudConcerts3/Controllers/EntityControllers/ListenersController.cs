@@ -46,7 +46,7 @@ namespace CloudConcerts3.Controllers.EntityControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,City,State,ImageURL")] Listener listener)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,City,State")] Listener listener)
         {
             if (ModelState.IsValid)
             {
@@ -78,11 +78,15 @@ namespace CloudConcerts3.Controllers.EntityControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,City,State,ImageURL")] Listener listener)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,City,State,ImageURL")] Listener listener, HttpPostedFileBase imagefile)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(listener).State = EntityState.Modified;
+                if (imagefile != null)
+                {
+                    listener.ImageURL = CloudConcerts3.Models.ImageStorage.UploadBlob(listener.ImageURL, imagefile);
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -115,6 +119,24 @@ namespace CloudConcerts3.Controllers.EntityControllers
             db.AspNetUsers.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteImage(string userid)
+        {
+            if (userid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Listener listener = db.Listeners.Find(userid);
+            if (listener == null)
+            {
+                return HttpNotFound();
+            }
+            CloudConcerts3.Models.ImageStorage.DeleteBlob(listener.ImageURL);
+            listener.ImageURL = null;
+            db.SaveChanges();
+            return RedirectToAction("Edit", new { id = userid });
         }
 
         protected override void Dispose(bool disposing)
