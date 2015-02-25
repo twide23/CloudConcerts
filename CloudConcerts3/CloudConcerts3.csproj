@@ -446,6 +446,9 @@
     <Content Include="Views\GigGenres\Details.cshtml" />
     <Content Include="Views\GigGenres\Edit.cshtml" />
     <Content Include="Views\GigGenres\Index.cshtml" />
+    <Content Include="Views\ProfilePartials\_ArtistHome.cshtml" />
+    <Content Include="Views\ProfilePartials\_HostHome.cshtml" />
+    <Content Include="Views\ProfilePartials\_ListenerHome.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

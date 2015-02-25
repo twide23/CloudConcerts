@@ -1,0 +1,15 @@
+﻿@model CloudConcerts3.Models.Host
+
+<h2>@Html.DisplayFor(model => model.VenueName)</h2>
+
+@if (Model.ImageURL != null)
+{
+    <img src="@Model.ImageURL" title="@Model.ImageURL" class="browse_profile_picture" />
+}
+
+<p>Do you have an upcoming event and need a performer?</p>
+<p>
+    <a href="@Url.Action("Create", "Gigs")" class="btn btn-info btn-lg">Create a gig &raquo;</a>
+    <a href="@Url.Action("Index", "Gigs")" class="btn btn-info btn-lg">View my gigs &raquo;</a>
+</p>
+

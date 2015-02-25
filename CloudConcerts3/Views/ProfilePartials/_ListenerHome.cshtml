@@ -1,0 +1,11 @@
+﻿@model CloudConcerts3.Models.Listener
+
+<h2>@Html.DisplayFor(model => model.FirstName)</h2>
+
+@if (Model.ImageURL != null)
+{
+    <img src="@Model.ImageURL" title="@Model.ImageURL" class="browse_profile_picture" />
+}
+
+<p>Logged in as a LISTENER</p>
+<p><a href="@Url.Action("Index", "Concerts")" class="btn btn-info btn-lg">Find concerts &raquo;</a></p>

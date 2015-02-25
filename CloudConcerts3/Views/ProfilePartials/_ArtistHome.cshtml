@@ -1,0 +1,10 @@
+﻿@model CloudConcerts3.Models.Artist
+
+<h2>@Html.DisplayFor(model => model.StageName)</h2>
+
+@if (Model.ImageURL != null)
+{
+    <img src="@Model.ImageURL" title="@Model.ImageURL" class="browse_profile_picture" />
+}
+
+<p><a href="@Url.Action("Apply", "Gigs")" class="btn btn-info btn-lg">Find a gig &raquo;</a></p>

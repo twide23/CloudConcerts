@@ -7,10 +7,10 @@
 
 <div class="jumbotron">
     <h1>Cloud Concerts</h1>
-    <p class="lead">Cloud Concerts helps venues find artists and helps listeners find concerts.</p>
 
     @if (Model == null)
     {
+        <p class="lead">Cloud Concerts helps venues find artists and helps listeners find concerts.</p>
         <p><a href="@Url.Action("Register", "Account")" class="btn btn-info btn-lg">Sign Up Today &raquo;</a></p>
     }
     else
@@ -21,24 +21,15 @@
         }
         else if (Model.Type == "Host")
         {
-            @*Add a link for "artists" here*@
-            <p>Do you have an upcoming event and need a performer?</p>
-            <p>
-                <a href="@Url.Action("Create", "Gigs")" class="btn btn-primary btn-lg">Create a gig &raquo;</a>
-                <a href="@Url.Action("Index", "Gigs")" class="btn btn-primary btn-lg">View my gigs &raquo;</a>
-            </p>
+            Html.RenderAction("HostHome", "Home", new { id = User.Identity.GetUserId() });
         }
         else if (Model.Type == "Artist")
         {
-            <p>Logged in as an ARTIST</p>
-            @*Add a link for "hosts/gigs" here*@
-            <p><a href="@Url.Action("Apply", "Gigs")" class="btn btn-primary btn-lg">Find a gig &raquo;</a></p>
+            Html.RenderAction("ArtistHome", "Home", new { id = User.Identity.GetUserId() });
         }
-        else if (Model.Type == "Listener")
+        else
         {
-            <p>Logged in as a LISTENER</p>
-            @*Add a link for "concerts" here*@
-            <p><a href="@Url.Action("Index", "Concerts")" class="btn btn-primary btn-lg">Find concerts &raquo;</a></p>
+            Html.RenderAction("ListenerHome", "Home", new { id = User.Identity.GetUserId() });
         }
 
     }
@@ -49,16 +40,16 @@
     <div class="col-md-4">
         <h2>Looking for artists?</h2>
         <p>You can find performers and bands for your next gig!</p>
-        <p><a class="btn btn-default" href="@Url.Action("Artists", "Browse")">Find Artists &raquo;</a></p>
+        <p><a class="btn btn-info" href="@Url.Action("Artists", "Browse")">Find Artists &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Looking for concerts?</h2>
         <p>You can find concerts that are happening in your area!</p>
-        <p><a class="btn btn-default" href="@Url.Action("Concerts", "Browse")">Find Concerts &raquo;</a></p>
+        <p><a class="btn btn-info" href="@Url.Action("Concerts", "Browse")">Find Concerts &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Looking for venues?</h2>
         <p>You can find venues that regularly have concerts!</p>
-        <p><a class="btn btn-default" href="@Url.Action("Hosts", "Browse")">Find Venues &raquo;</a></p>
+        <p><a class="btn btn-info" href="@Url.Action("Hosts", "Browse")">Find Venues &raquo;</a></p>
     </div>
 </div>

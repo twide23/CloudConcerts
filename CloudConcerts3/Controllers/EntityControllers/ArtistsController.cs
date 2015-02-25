@@ -119,6 +119,7 @@ namespace CloudConcerts3.Controllers.EntityControllers
         public ActionResult DeleteConfirmed(string id)
         {
             Artist artist = db.Artists.Find(id);
+            CloudConcerts3.Models.ImageStorage.DeleteBlob(artist.ImageURL);
             db.Artists.Remove(artist);
             AspNetUser user = db.AspNetUsers.Find(id);
             db.AspNetUsers.Remove(user);

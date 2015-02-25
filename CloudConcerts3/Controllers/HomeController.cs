@@ -61,5 +61,26 @@ namespace CloudConcerts3.Controllers
 
             return View();
         }
+
+        public ActionResult ArtistHome(string id)
+        {
+            Artist art = db.Artists.Find(id);
+
+            return PartialView("~/Views/ProfilePartials/_ArtistHome.cshtml", art);
+        }
+
+        public ActionResult HostHome(string id)
+        {
+            Host host = db.Hosts.Find(id);
+
+            return PartialView("~/Views/ProfilePartials/_HostHome.cshtml", host);
+        }
+
+        public ActionResult ListenerHome(string id)
+        {
+            Listener listener = db.Listeners.Find(id);
+
+            return PartialView("~/Views/ProfilePartials/_ListenerHome.cshtml", listener);
+        }
     }
 }

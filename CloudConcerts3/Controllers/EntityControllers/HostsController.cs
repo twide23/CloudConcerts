@@ -114,6 +114,7 @@ namespace CloudConcerts3.Controllers.EntityControllers
         public ActionResult DeleteConfirmed(string id)
         {
             Host host = db.Hosts.Find(id);
+            CloudConcerts3.Models.ImageStorage.DeleteBlob(host.ImageURL);
             db.Hosts.Remove(host);
             AspNetUser user = db.AspNetUsers.Find(id);
             db.AspNetUsers.Remove(user);
